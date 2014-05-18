@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_data_method">syncData</string>
+    <string name="app_no_company_preset">true</string>
+    <string name="application_endpoint">http://www.preshopping.net/</string>
+    <string name="addmin_acc_name">Admin</string>
+    <string name="addmin_password">preshopping04</string>
+</resources>

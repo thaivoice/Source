@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_register"><b>Sign in</b></string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_forgot_password">Recover lost password</string>
+    <string name="login_progress_signing_in">Signing in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_email_already_registered">This email has been already registered by someone else</string>
+    <string name="error_mobile_number_already_registered">This mobile number has been already registered by someone else</string>
+    <string name="lbl_msg_validate_email">Validating email, please wait...</string>
+    <string name="lbl_msg_mobile_number">Validating mobile number, please wait...</string>
+    <string name="error_emails_not_equal">Confirmed email is not the same as provided email</string>
+    <string name="error_pw_not_equal">Confirmed password is not the same as provided password</string>
+
+</resources>

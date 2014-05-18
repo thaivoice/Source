@@ -1,0 +1,91 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.impact.preshopping.activity.RegistrationActivity2"
+        tools:ignore="MergeRootFrame" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <com.impact.preshopping.adapter.SquareImageView
+                android:id="@+id/imageViewAvatar"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:src="@drawable/contacts_96px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:context=".RegistrationActivity" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:text="@string/lbl_registration"
+                android:textAppearance="@android:style/TextAppearance.Large" />
+
+            <include layout="@layout/screen_name" />
+
+
+
+            <include layout="@layout/firstname" />
+
+            <include layout="@layout/lastname" />
+
+            <include layout="@layout/email" />
+
+           
+
+            <include layout="@layout/office_phone" />
+
+            <include layout="@layout/mobile_phone" />
+
+            <include layout="@layout/facebook" />
+
+            <include layout="@layout/instragram" />
+
+            <include layout="@layout/tweeter" />
+
+            <include layout="@layout/skype" />
+
+            <include layout="@layout/line" />
+
+            <include layout="@layout/preferred_lang_2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/save" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

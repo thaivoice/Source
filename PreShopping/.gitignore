@@ -1,0 +1,6 @@
+/bin
+/gen
+/my_rsa_key
+/my_rsa_key.pub
+/.idea
+/.settings

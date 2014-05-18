@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="temp">
+        <![CDATA[
+        
+        Qk3gAQAAAAAAAE4AAAAoAAAAJQAAABQAAAABAAQAAAAAAAAAAAASCwAAEgsAAAYAAAAGAAAA////AHR0dgBEREQAHBIdAA4JDgAAAAAAUAAAAAAAAAAAAAAAAAAAAAAABVVQAAAAAAAAAAAAAAAAAAAAAAAFVVAAAAAAAAAAAAAAAAAAAAAAAAVRUAAAAAAAAAAAAAAAAAAAAAAABVVQAAAAAAAAAAAAAAAAAAAAAAAFVVAAAAAAAAAAAAAAAAAAAAAAAAUMUAABEAAAAAAAAAAAAAAAAAAABVVQABVRAVEAJSEBUhACUAJDEAAFAlAAAFUBUQJRJQFRUgJQJBJRAAVVUAAFUgFRAlAVEVAVElBCAFIAB1VQABUgAVECUBURUSUSUCURUQAMVFAAAVUlVSJQFRFVIQJQAjMgAAVVUAAAAAAAAAAAAAAAAAAAAAAABRVQAAAAAAAAAAAAAAAAAAAAAAAFA1AAAAAAAAAAAAAAAAAAAAAAAAVVUAAAAAAAAAAAAAAAAAAAAAAABFVQAAAAAAAAAAAAAAAAAAAAAAAFVVAAAAAAAAAAAAAAAAAAAAAAAAVQUAAAAAAAAAAAAAAAAAAAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVQAA
+        ]]>
+        
+    </string>
+    
+    <string name="db_create_push_tbl">
+<![CDATA[
+        CREATE TABLE push_history (
+  _id integer PRIMARY KEY NOT NULL,
+  start_date text,
+  end_date text,
+  promotion_desc text,
+  promotion_url text,
+  company_id text,
+  have_seen text,
+  number_of_visit text,
+  other3 text
+);
+        
+        ]]>
+    </string>
+    
+    
+    <string name="db_create_address">
+<![CDATA[
+        CREATE TABLE address (
+  _id integer PRIMARY KEY NOT NULL,
+  address text,
+  address2 text,
+  district text,
+  city_id text,
+  postal_code text,
+  phone text,
+  last_update text,
+  other1 text,
+  other2 text,
+  other3 text
+);
+        
+        ]]>
+    </string>
+    
+    <string name="db_create_registration_info">
+        <![CDATA[
+        CREATE TABLE registrationInfo (
+  _id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+  screenName text,
+  password text,
+  firstName text,
+  lastName text,
+  isActive text,
+  email text,
+  officePhone text,
+  mobilePhone text,
+  facebook text,
+  instragram text,
+  tweeter text,
+  skype text,
+  line text,
+  preferredLang text,
+  imei text,
+  deviceID text,
+  avatar blob,
+  other1 text,
+  other2 text,
+  other3 text,
+  deviceType text
+);
+]]>
+    </string>
+    
+    
+    <string name="db_create_dbversion">
+<![CDATA[        
+        CREATE TABLE dbVersion (
+  _id integer PRIMARY KEY NOT NULL,
+  version text,
+  lastUpdateTime text,
+  other1 text,
+  other2 text,
+  other3 text
+);
+        ]]>
+    </string>
+    <string name="db_select_dbversion">
+<![CDATA[        
+  select * from dbVersion
+        ]]>
+    </string>
+    
+    <string name="db_select_settings">
+<![CDATA[        
+   SELECT * FROM setting
+        ]]>
+    </string>
+   
+    
+    
+    <string name="db_update_media_filepath">
+<![CDATA[        
+  update media set filePath = "%1$s" where _id = %2$s
+        ]]>
+    </string>
+    <string name="db_create_company">
+<![CDATA[
+      CREATE TABLE company (
+  _id integer PRIMARY KEY NOT NULL,
+  name text,
+  taxId text,
+  contactPerson text,
+  phoneNumber text,
+  icon text,
+  iconFilePath text,
+  image text,
+  beginDate text,
+  endDate text,
+  other1 text,
+  other2 text,
+  other3 text
+);
+      ]]>
+    </string>
+    <string name="db_select_all_icon_url_company">SELECT _id, icon from company WHERE iconFilePath is null</string>
+    <string name="db_select_all_url_media_by_prod_id">SELECT url from media where (filePath is null OR filePath = "0") and productId = %s and type = 1</string>
+    <string name="db_select_all_filepath_media_by_prod_id">SELECT filePath from media where productId = %s and type = 1</string>
+    <string name="db_select_all_video_info_media_by_prod_id">SELECT * from media where productId = %s and (type = 3 Or type = 2)</string>
+    <string name="db_select_prod_lng_desc">
+        SELECT shortName, longDesc, iconFilePath from product WHERE _id = %s
+    </string>
+    
+    <string name="db_create_media">
+<![CDATA[
+      CREATE TABLE media (
+  _id integer PRIMARY KEY NOT NULL,
+  url text,
+  filePath text,
+  fileSize text,
+  shortDesc text,
+  longDesc text,
+  type text,
+  productId text,
+  other1 text,
+  other2 text,
+  other3 text
+);
+      
+      ]]>
+    </string>
+    <string name="db_create_prodCategory">
+<![CDATA[
+      
+      CREATE TABLE prodCategory (
+  _id integer PRIMARY KEY NOT NULL,
+  name text,
+  icon text,
+  iconFilePath text,
+  image text,
+  company_id text,
+  other1 text,
+  other2 text,
+  other3 text
+);
+      
+      ]]>
+    </string>
+    <string name="db_select_all_icon_url_prodCategory">SELECT _id, icon from prodCategory WHERE iconFilePath is null</string>
+    <string name="db_create_prodGroup">
+<![CDATA[
+      CREATE TABLE prodGroup (
+  _id integer PRIMARY KEY NOT NULL,
+  name text,
+  icon text,
+  iconFilePath text,
+  image text,
+  categoryId text,
+  other1 text,
+  other2 text,
+  other3 text
+);
+      
+      ]]>
+    </string>
+    <string name="db_select_all_icon_url_prodGroup">SELECT _id, icon from prodGroup WHERE iconFilePath is null</string>
+    <string name="db_create_product">
+<![CDATA[
+      CREATE TABLE product (
+  _id integer PRIMARY KEY NOT NULL,
+  shortName text,
+  longName text,
+  shortDesc text,
+  longDesc text,
+  rating text,
+  icon text,
+  iconFilePath text,
+  barcodeData text,
+  maker text,
+  model text,
+  createdBy text,
+  groupId text,
+  other1 text,
+  other2 text,
+  other3 text
+);
+      
+      ]]>
+    </string>
+    <string name="db_select_all_icon_url_product">SELECT _id, icon from product WHERE iconFilePath is null</string>
+    <string name="db_select_all_icon_filepath_product_by_grp_id">SELECT * from product WHERE groupId = %s</string>
+    <string name="db_create_pushNotification">
+<![CDATA[
+      
+      CREATE TABLE pushNotification (
+  _id integer PRIMARY KEY NOT NULL,
+  pushSuccess text,
+  startDate text,
+  endDate text,
+  devIds text,
+  productId text,
+  other1 text,
+  other2 text,
+  other3 text
+);
+      ]]>
+    </string>
+    <string name="db_create_setting">
+<![CDATA[
+      CREATE TABLE setting (
+  _id integer PRIMARY KEY NOT NULL,
+  downloadPermision text,
+  homeScreenType text,
+  prodCategories text,
+  prodGroups text,
+  products text,
+  notificationOnOff text,
+  alertType text,
+  soundFile text,
+  userId text,
+  other1 text,
+  other2 text,
+  other3 text,
+  Companies text
+);
+      
+      ]]>
+    </string>
+    <string name="db_create_user">
+<![CDATA[
+      CREATE TABLE user (
+  _id integer PRIMARY KEY NOT NULL,
+  screenName text,
+  password text,
+  firstName text,
+  lastName text,
+  lastLogin text,
+  createDate text,
+  email text,
+  officePhone text,
+  mobilePhone text,
+  facebook text,
+  instragram text,
+  tweeter text,
+  skype text,
+  line text,
+  preferredLang text,
+  imei text,
+  isActivated text,
+  activatedDate text,
+  addressId text,
+  other1 text,
+  other2 text,
+  other3 text
+);
+      ]]>
+    </string>
+    <string name="db_create_videoStatistic">
+<![CDATA[
+      CREATE TABLE videoStatistic (
+  _id integer PRIMARY KEY NOT NULL,
+  watchedType text,
+  userId text,
+  pushId text,
+  other1 text,
+  other2 text,
+  other3 text
+  
+);
+      
+      ]]>
+    </string>
+    <string name="db_update_column" formatted="false"><![CDATA[UPDATE %s set iconFilePath = \'%s\' WHERE _id = %s]]></string>
+
+</resources>

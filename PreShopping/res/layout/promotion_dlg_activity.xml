@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textViewPromotionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:text="@string/current_promotion" />
+
+    <TextView
+        android:id="@+id/textViewPromotionDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="TextView" />
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal" >
+
+        <Button
+            android:id="@+id/btnNoThanks"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_no_thanks" />
+
+        <Button
+            android:id="@+id/btnYes"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_yes" />
+    </LinearLayout>
+
+</LinearLayout>

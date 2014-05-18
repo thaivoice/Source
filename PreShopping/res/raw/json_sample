@@ -1,0 +1,134 @@
+[
+  {
+    "companyID": "1",
+    "comName": "Antenna Audio",
+    "taxID": "123456789",
+    "contactPerson": "Vi",
+    "phoneNumber": "0123456789",
+    "faxNumber": "",
+    "logoIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/2a.png",
+    "logoImage": "",
+    "CatagoryList": [
+      {
+        "catID": "1",
+        "catName": "Books",
+        "catIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/1a.png",
+        "catImage": "http://mobile.bgnsolutions.com/media/image/1a.jpg",
+        "GroupList": [
+          {
+            "grpID": "1",
+            "catID": "1",
+            "grpName": "Magazine",
+            "grpIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/1b.png",
+            "grpImage": "http://mobile.bgnsolutions.com/media/image/1b.jpg",
+            "ProductList": [
+              {
+                "prodID": "1",
+                "grpID": "1",
+                "prodName": "Time",
+                "prodLongName": "TIME Magazine",
+                "prodShortDesc": "TIME Magazine",
+                "prodDesc": "TIME Magazine",
+                "rating": "5",
+                "prodIcon": "itime.png",
+                "qrData": "",
+                "isActive": "\\u0001",
+                "maker": "",
+                "model": "",
+                "MediaList": [
+                  {
+                    "mediaID": "1",
+                    "prodID": "1",
+                    "mediaURL": "http://mobile.bgnsolutions.com/media/image/20a.jpg",
+                    "fileSize": "0",
+                    "shortDesc": "",
+                    "longDesc": "",
+                    "mediaType": "1"
+                  },
+                  {
+                    "mediaID": "2",
+                    "prodID": "1",
+                    "mediaURL": "http://mobile.bgnsolutions.com/media/audio/eng_20c.mp3",
+                    "fileSize": "0",
+                    "shortDesc": "",
+                    "longDesc": "",
+                    "mediaType": "2"
+                  },
+                  {
+                    "mediaID": "3",
+                    "prodID": "1",
+                    "mediaURL": "http://mobile.bgnsolutions.com/media/video/eng_20a.mp4",
+                    "fileSize": "0",
+                    "shortDesc": "",
+                    "longDesc": "",
+                    "mediaType": "3"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "grpID": "2",
+            "catID": "1",
+            "grpName": "Cartton",
+            "grpIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/2b.png",
+            "grpImage": "http://mobile.bgnsolutions.com/media/image/2b.jpg",
+            "ProductList": []
+          }
+        ]
+      },
+      {
+        "catID": "3",
+        "catName": "Camera",
+        "catIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/3a.png",
+        "catImage": "http://mobile.bgnsolutions.com/media/image/3a.jpg",
+        "GroupList": [
+          {
+            "grpID": "4",
+            "catID": "3",
+            "grpName": "Cannon",
+            "grpIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/4b.png",
+            "grpImage": "http://mobile.bgnsolutions.com/media/image/4b.jpg",
+            "ProductList": []
+          },
+          {
+            "grpID": "5",
+            "catID": "3",
+            "grpName": "Nikon",
+            "grpIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/5b.png",
+            "grpImage": "http://mobile.bgnsolutions.com/media/image/5b.jpg",
+            "ProductList": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "companyID": "2",
+    "comName": "Garry Company",
+    "taxID": "99999999",
+    "contactPerson": "Tu",
+    "phoneNumber": "0999999999",
+    "faxNumber": "023456789",
+    "logoIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/3b.png",
+    "logoImage": "i_garry.png",
+    "CatagoryList": [
+      {
+        "catID": "2",
+        "catName": "Computers",
+        "catIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/2a.png",
+        "catImage": "http://mobile.bgnsolutions.com/media/image/2a.jpg",
+        "GroupList": [
+          {
+            "grpID": "3",
+            "catID": "2",
+            "grpName": "Notebook",
+            "grpIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/3b.png",
+            "grpImage": "http://mobile.bgnsolutions.com/media/image/3b.jpg",
+            "ProductList": []
+          }
+        ]
+      }
+    ]
+  }
+]

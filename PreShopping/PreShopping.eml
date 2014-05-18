@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component LANGUAGE_LEVEL="JDK_1_6" inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="commons-lang-2.5.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/PreShopping/libs/commons-lang-2.5.jar!/"/>
+	</lib>
+	<lib name="gson-2.2.4.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/PreShopping/libs/gson-2.2.4.jar!/"/>
+	</lib>
+	<lib name="zbar.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/PreShopping/libs/zbar.jar!/"/>
+	</lib>
+	<levels>
+		<level name="google-play-services" value="project"/>
+	</levels>
+</component>

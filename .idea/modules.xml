@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/OI Distribution Library/OI Distribution Library.iml" filepath="$PROJECT_DIR$/OI Distribution Library/OI Distribution Library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OI File Manager/OI File Manager.iml" filepath="$PROJECT_DIR$/OI File Manager/OI File Manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PreShopping/PreShopping.iml" filepath="$PROJECT_DIR$/PreShopping/PreShopping.iml" />
+      <module fileurl="file://$PROJECT_DIR$/actionbarsherlock/actionbarsherlock.iml" filepath="$PROJECT_DIR$/actionbarsherlock/actionbarsherlock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appcompat_v7_2/android-support-v7-appcompat.iml" filepath="$PROJECT_DIR$/appcompat_v7_2/android-support-v7-appcompat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/google-play-services_lib/google-play-services_lib.iml" filepath="$PROJECT_DIR$/google-play-services_lib/google-play-services_lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/immersive-videoplayer-android-master/immersive-videoplayer-android-master.iml" filepath="$PROJECT_DIR$/immersive-videoplayer-android-master/immersive-videoplayer-android-master.iml" />
+    </modules>
+  </component>
+</project>
+

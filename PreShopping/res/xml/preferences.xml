@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+
+<!-- This is a primitive example showing the different types of preferences available. -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- <PreferenceCategory android:title="@string/inline_preferences" > -->
+    <!-- <CheckBoxPreference -->
+    <!-- android:key="checkbox_preference" -->
+    <!-- android:summary="@string/summary_checkbox_preference" -->
+    <!-- android:title="@string/title_checkbox_preference" /> -->
+    <!-- </PreferenceCategory> -->
+    <!-- <PreferenceCategory android:title="@string/dialog_based_preferences" > -->
+    <!-- <EditTextPreference -->
+    <!-- android:dialogTitle="@string/dialog_title_edittext_preference" -->
+    <!-- android:key="edittext_preference" -->
+    <!-- android:summary="@string/summary_edittext_preference" -->
+    <!-- android:title="@string/title_edittext_preference" /> -->
+
+
+    <!-- <ListPreference -->
+    <!-- android:dialogTitle="@string/dialog_title_list_preference" -->
+    <!-- android:entries="@array/entries_list_preference" -->
+    <!-- android:entryValues="@array/entryvalues_list_preference" -->
+    <!-- android:key="list_preference" -->
+    <!-- android:summary="@string/summary_list_preference" -->
+    <!-- android:title="@string/title_list_preference" /> -->
+    <!-- </PreferenceCategory> -->
+    <!-- <PreferenceCategory android:title="@string/launch_preferences" > -->
+    <!-- <PreferenceScreen -->
+    <!-- android:summary="@string/summary_intent_preference" -->
+    <!-- android:title="@string/title_intent_preference" > -->
+    <!-- <intent -->
+    <!-- android:action="android.intent.action.VIEW" -->
+    <!-- android:data="http://www.android.com" /> -->
+    <!-- </PreferenceScreen> -->
+    <!-- </PreferenceCategory> -->
+
+    <Preference
+        android:key="pref_header"
+        android:layout="@layout/favorite_setting_header"
+        android:title="Favorite Setting" >
+    </Preference>
+
+    <PreferenceCategory
+        android:key="pref_category_endpoint"
+        android:title="App Endpoint" >
+        <EditTextPreference
+            android:defaultValue="@string/application_endpoint"
+            android:key="pref_app_endoint"
+            android:summary="Single tap to change application endpoint"
+            android:title="Applicationn Endpoint"
+             />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_category_download_permission"
+        android:title="Donwload Permission" >
+        <CheckBoxPreference
+            android:key="download_permission"
+            android:summary="Tick to disable or enable asking for permission before downloading media"
+            android:title="Permision" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_category_favorite_product"
+        android:title="Favorite Company Setting" >
+        <MultiSelectListPreference
+            android:dialogTitle="Select your companies of interest"
+            android:entries="@array/entries_list_preference"
+            android:entryValues="@array/entryvalues_list_preference"
+            android:key="by_company"
+            android:summary="Specify which company you are interested in knowing their products update"
+            android:title="By Company" />
+        <!--
+        <MultiSelectListPreference
+            android:dialogTitle="Select your favorite categories"
+            android:entries="@array/entries_list_preference"
+            android:entryValues="@array/entryvalues_list_preference"
+            android:key="by_category"
+            android:summary="Specify which category you are interested in knowing its products update"
+            android:title="By Category" />
+        <MultiSelectListPreference
+            android:dialogTitle="Select your favorite groups"
+            android:entries="@array/entries_list_preference"
+            android:entryValues="@array/entryvalues_list_preference"
+            android:key="by_group"
+            android:summary="Specify which group you are interested in knowing its products update"
+            android:title="By Group" />
+        <MultiSelectListPreference
+            android:dialogTitle="Select your favorite products"
+            android:entries="@array/entries_list_preference"
+            android:entryValues="@array/entryvalues_list_preference"
+            android:key="by_product"
+            android:summary="Specify which product you are interested in knowing its update"
+            android:title="By Product" />
+        -->
+    </PreferenceCategory>
+    <!--
+    <PreferenceCategory
+        android:key="pref_category_home_screen_selection"
+        android:title="Home Screen Selection" >
+        <ListPreference
+            android:dialogTitle="Select application start screen"
+            android:entries="@array/entries_list_preference"
+            android:entryValues="@array/entryvalues_list_preference"
+            android:key="home_screen"
+            android:summary="Select application start screen"
+            android:title="Select start screen" />
+    </PreferenceCategory>
+    -->
+    <PreferenceCategory
+        android:key="pref_category_notification_on_off"
+        android:title="Enable/Disable Notification" >
+        <CheckBoxPreference
+            android:defaultValue="1"
+            android:key="notification_on_off"
+            android:summaryOff="@string/notification_summary_off"
+            android:summaryOn="@string/notification_summary_on" >
+        </CheckBoxPreference>
+
+        <ListPreference
+            android:defaultValue="1"
+            android:dependency="notification_on_off"
+            android:dialogTitle="Select alert type"
+            android:entries="@array/entries_list_notification"
+            android:entryValues="@array/entryvalues_list_notification"
+            android:key="alert_type"
+            android:summary="Select alert dialog and sound"
+            android:title="Alert setting" />
+
+        <RingtonePreference
+            android:dependency="notification_on_off"
+            android:key="notification_sounds"
+            android:ringtoneType="notification"
+            android:showDefault="true"
+            android:summary="Click to select notification sound"
+            android:title="Notification sound" >
+        </RingtonePreference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

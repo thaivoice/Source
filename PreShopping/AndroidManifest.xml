@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.impact.preshopping"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <!-- Donut-specific flags which allow us to run on any dpi screens. -->
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <permission-group android:name="android.permission-group.STORAGE" >
+    </permission-group>
+    <!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Creates a custom permission so only this app can receive its messages. -->
+    <permission
+        android:name="com.impact.preshopping.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.impact.preshopping.permission.C2D_MESSAGE" />
+
+    <!-- This app has permission to register and receive data message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:name="com.impact.preshopping.PreShoppingApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="PreShopping"
+        android:theme="@style/Sherlock.__Theme.Light" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <activity
+            android:name="com.impact.preshopping.PreLoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name="com.impact.preshopping.RegistrationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_dummy_activity2" />
+
+        <provider
+            android:name="com.impact.preshopping.contentprovider.AddressContentProvider"
+            android:authorities="com.impact.preshopping.contentprovider.addresscontentprovider" />
+        <provider
+            android:name="com.impact.preshopping.contentprovider.CompanyContentProvider"
+            android:authorities="com.impact.preshopping.contentprovider.companycontentprovider" />
+        <provider
+            android:name="com.impact.preshopping.contentprovider.MediaContentProvider"
+            android:authorities="com.impact.preshopping.contentprovider.mediacontentprovider" />
+        <provider
+            android:name="com.impact.preshopping.contentprovider.ProdcategoryContentProvider"
+            android:authorities="com.impact.preshopping.contentprovider.prodcategorycontentprovider" />
+        <provider
+            android:name="com.impact.preshopping.contentprovider.ProdgroupContentProvider"
+            android:authorities="com.impact.preshopping.contentprovider.prodgroupcontentprovider" />
+        <provider
+            android:name="com.impact.preshopping.contentprovider.ProductContentProvider"
+            android:authorities="com.impact.preshopping.contentprovider.productcontentprovider" />
+        <provider
+            android:name="com.impact.preshopping.contentprovider.PushnotificationContentProvider"
+            android:authorities="com.impact.preshopping.contentprovider.pushnotificationcontentprovider" />
+        <provider
+            android:name="com.impact.preshopping.contentprovider.SettingContentProvider"
+            android:authorities="com.impact.preshopping.contentprovider.settingcontentprovider" />
+        <provider
+            android:name="com.impact.preshopping.contentprovider.UserContentProvider"
+            android:authorities="com.impact.preshopping.contentprovider.usercontentprovider" />
+        <provider
+            android:name="com.impact.preshopping.contentprovider.VideostatisticContentProvider"
+            android:authorities="com.impact.preshopping.contentprovider.videostatisticcontentprovider" />
+
+        <activity
+            android:name="com.impact.preshopping.GridViewCompanyActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.LoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.MainFragmentActivity"
+            android:label="@string/title_activity_main_fragment" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.CompanyFragmentActivity"
+            android:label="@string/title_activity_company_fragment" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.activity.CompanyActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.activity.CategoryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.activity.GroupActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.activity.ProductActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_product" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.activity.PhotoGalleryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_photo_gallery" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.activity.VideoListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_video" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.VideoPlayerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_video_player" >
+        </activity>
+        <activity android:name="com.stickmanventures.android.example.immersive_videoplayer.ui.activities.VideoPlayerActivity" android:launchMode="singleTask">
+        </activity>
+
+        <receiver
+            android:name="com.impact.preshopping.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+
+                <!-- Receives the actual messages. -->
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <!-- Receives the registration id. -->
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <action android:name="com.google.android.c2dm.intent.GCM_RECEIVED_ACTION" />
+
+                <category android:name="com.dudev.util.gcm.GCMIntentService" />
+                <category android:name="com.impact.preshopping" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.impact.preshopping.GcmIntentService" >
+        </service>
+
+        <activity
+            android:name="com.impact.preshopping.SplashScreenActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.impact.preshopping.DownloadIntentService"
+            android:exported="false" >
+        </service>
+
+        <activity
+            android:name="com.impact.preshopping.activity.RegistrationActivity2"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_registration_activity2" >
+        </activity>
+        <activity android:name="com.impact.preshopping.activity.FileExplore" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.FavoriteSettingActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_favorite_setting" >
+        </activity>
+        <!--
+        <activity
+            android:name="com.google.zxing.client.android.CaptureActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.Sherlock.Light.NoActionBar" >
+        </activity>
+        -->
+        <activity
+            android:name="com.impact.preshopping.SwapDeviceActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_swap_device" >
+        </activity>
+        <activity
+            android:name="com.impact.preshopping.ManageDataPanelActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_manage_data_panel" >
+        </activity>
+
+        <receiver
+            android:name="com.impact.preshopping.VideoDownloadTaskReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
+
+        <activity
+            android:name="com.impact.preshopping.ScannerActivity"
+            android:theme="@android:style/Theme.NoTitleBar.OverlayActionModes" >
+        </activity>
+        <activity android:name="net.appositedesigns.fileexplorer.activity.FileListActivity"></activity>
+        <activity android:theme="@android:style/Theme.Dialog" android:name=".activity.PromotionDlgActivity"></activity>
+        <activity android:name="com.dudev.util.webview.WebViewDemoActivity" android:launchMode="singleInstance"></activity>
+        <activity android:name="PromotionHistoryListActivity"></activity>
+        <service android:name="SyncDataService"></service>
+        
+    </application>
+
+</manifest>

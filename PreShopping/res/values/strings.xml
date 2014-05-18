@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="application_name">ActionBarSherlock Demos</string>
+    <string name="activity_name">ABS: Demos</string>
+    <string name="action_items">Action Items</string>
+    <string name="action_items_content">The action bar creates a unified and persistant navigation experience for your application and action items are a great way to provide a clear indication of what the user can do.</string>
+    <string name="action_modes">Action Modes</string>
+    <string name="action_modes_content">Action modes are used to display contextual information based on some interaction made by the user (long press, checkbox selection, etc). Like the normal action bar they also support splitting the action items to the bottom of the screen on small devices.</string>
+    <string name="action_modes_no_action_bar">Action Modes (No Action Bar)</string>
+    <string name="share_action_providers">Share Action Providers</string>
+    <string name="share_action_providers_content">This activity demonstrates how to use an ActionProvider for adding functionality to the Action Bar. In particular this demo is adding a menu item with ShareActionProvider as its action provider. The ShareActionProvider is responsible for managing the UI for sharing actions.\n\nFor now, ShareActionProviders must be displayed on the action bar</string>
+    <string name="action_providers">Action Providers</string>
+    <string name="action_providers_content">This activity demonstrates how to implement an ActionProvider for adding functionality to the Action Bar. In particular this demo creates an ActionProvider for launching the system settings and adds a menu item with that provider.</string>
+    <string name="collapsible">Collapsible Action Items</string>
+    <string name="collapsible_content">This activity is a demonstration of how collapsible action items work. When you are concerned about the available room for items on small screens you should use this feature.\n\nIf you are looking for a proper SearchView implementation, see this "Search Views" example.</string>
+    <string name="context_menus">Context Menus</string>
+    <string name="context_menus_content">Since both ActionBarSherlock and Android use \'Menu\' and \'MenuItem\' class names you must take extra care when using context menus. It is still very much possible to use both in a single activity.</string>
+    <string name="custom_navigation">Custom Navigation</string>
+    <string name="custom_navigation_content">If you find that list and tab navigation are not suitable for your application you may replace it with a custom layout.</string>
+    <string name="dialog">Dialog</string>
+    <string name="dialog_content">This is a demonstration of how you can give an activity the look of a dialog.\n\nWhile there is a light version of this theme, it cannot be set programmatically without disabling the fancy transparent outer background. In order for this effect the theme must be set in the manifest.</string>
+    <string name="feature_toggles">Feature Toggles</string>
+    <string name="feature_toggles_content">Use these buttons to create various configurations with the action bar to see how it behaves.</string>
+    <string name="iprogress">Indeterminate Progress</string>
+    <string name="iprogress_content">The action bar includes a standard indeterminate progress bar. The methods for accessing it are prefixed with `support`. See the source for this demo for more information.</string>
+    <string name="list_navigation">List Navigation</string>
+    <string name="list_navigation_content">List navigation requires the use of a special layout for the spinner item. Failure to use it will result in your spinner text being the same color as the action bar background on pre-3.0. See the source code of this demo for more information.</string>
+    <string name="overlay">Overlay</string>
+    <string name="overlay_content">Overlay can be useful if you have a lot of scrolling content, especially if that content is images. Remember to lead your content with a margin so that it starts below the action bar when scrolled to the top.</string>
+    <string name="preference">Preference</string>
+    <string name="preference_content">You can use the `SherlockPreferenceActivity` base class to place the action bar on top of a normal `PreferenceActivity`.\n\nThis does not yet support the use of `PreferenceFragments`, however.</string>
+    <string name="progress">Progress</string>
+    <string name="progress_content">The action bar includes a standard progress bar. The methods for accessing it are prefixed with `support`. See the source for this demo for more information.</string>
+    <string name="search_views">Search Views</string>
+    <string name="search_views_content">SearchView allows you provide a unified mechanism of searching with optional featurs such as auto-completion and an always-expanded mode.</string>
+    <string name="simple">Simple</string>
+    <string name="simple_content">This is a simple showcase of how easy it is to add the action bar to your activities. Take a look at the source code, it\'s surprisingly simple!</string>
+    <string name="split">Split Action Items</string>
+    <string name="split_content">This activity is a demonstration of how split action items work. When you are concerned about the available room for items on small screens you should use this feature.</string>
+    <string name="split_action_modes">Split Action Modes</string>
+    <string name="static_attach">Static Attachment</string>
+    <string name="static_attach_content">This is a simple showcase of how easy it is to add the action bar to your activities without having to extend from a custom activity. Take a look at the source code, it\'s surprisingly simple!</string>
+    <string name="styled">Styled</string>
+    <string name="styled_content">This is a simple showcase of how to style the action bar to your liking. Be sure to remember that you need to consider both the custom and native action bar when styling. Looking at this activity\'s style is a good way to start.</string>
+    <string name="submenus">Sub-menus</string>
+    <string name="submenus_content">This activity is a demonstration of how sub-menus work when they are either an action item or an item in the overflow menu.</string>
+    <string name="tab_navigation">Tab Navigation</string>
+    <string name="tab_navigation_content">Tabs can be useful for switching between a limited number of items. You can also collapse the main body of the action bar on small devices so that only the tab bar is displayed. See the source for more information.</string>
+    <string name="tab_navigation_collapsed">Tab Navigation (Collapsed)</string>
+    <string name="action_bar_share_with">Share with…</string>
+    <string name="inline_preferences">In-line preferences</string>
+    <string name="dialog_based_preferences">Dialog-based preferences</string>
+    <string name="launch_preferences">Launch preferences</string>
+    <string name="preference_attributes">Preference attributes</string>
+    <string name="title_checkbox_preference">Checkbox preference</string>
+    <string name="summary_checkbox_preference">This is a checkbox</string>
+    <string name="title_edittext_preference">Edit text preference</string>
+    <string name="summary_edittext_preference">An example that uses an edit text dialog</string>
+    <string name="dialog_title_edittext_preference">Enter your favorite animal</string>
+    <string name="title_list_preference">List preference</string>
+    <string name="summary_list_preference">An example that uses a list dialog</string>
+    <string name="dialog_title_list_preference">Choose one</string>
+    <string name="title_intent_preference">Intent preference</string>
+    <string name="summary_intent_preference">Launches an Activity from an Intent</string>
+    <string name="title_my_preference">My preference</string>
+    <string name="summary_my_preference">This is a custom counter preference</string>
+    <string name="title_advanced_toggle_preference">Haunted preference</string>
+    <string name="summary_on_advanced_toggle_preference">I\'m on! :)</string>
+    <string name="summary_off_advanced_toggle_preference">I\'m off! :(</string>
+    <string name="title_parent_preference">Parent checkbox preference</string>
+    <string name="summary_parent_preference">This is visually a parent</string>
+    <string name="title_child_preference">Child checkbox preference</string>
+    <string name="summary_child_preference">This is visually a child</string>
+    <string name="example_preference_dependency">Example preference dependency</string>
+    <string name="title_wifi">WiFi</string>
+    <string name="title_wifi_settings">WiFi settings</string>
+    <string name="default_value_list_preference">beta</string>
+    <string name="default_value_edittext_preference">Default value</string>
+    <string name="app_name">PreShopping</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_update">Update</string>
+    <string name="drawer_open"><![CDATA[<font size="3" color="red"><b>*</b></font>]]>Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="hello_world">Hello world!<![CDATA[<font size="3" color="red"><b>*</b></font>]]></string>
+
+    <string-array name="operating_systems">
+        <item>Android</item>
+        <item>iPhone</item>
+        <item>Windows Mobile</item>
+    </string-array>
+
+    <string name="title_activity_actionbar_drawer">ActionbarDrawerActivity</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="title_activity_dummy_activity2"><![CDATA[<font size="3" color="red"><b>*</b></font>]]></string>
+    <string name="sample_data">
+<![CDATA[
+
+  {
+    "status": "1",
+    "msg": "Return all data",
+    "data": [
+      {
+        "companyID": "1",
+        "comName": "Antenna Audio",
+        "taxID": "123456789",
+        "contactPerson": "Vi",
+        "phoneNumber": "0123456789",
+        "faxNumber": "",
+        "logoIcon": "",
+        "logoImage": "",
+        "CatagoryList": [
+          {
+            "catID": "1",
+            "catName": "Books",
+            "catIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/1a.png",
+            "catImage": "http://mobile.bgnsolutions.com/media/image/1a.jpg",
+            "GroupList": [
+              {
+                "grpID": "1",
+                "catID": "1",
+                "grpName": "Magazine",
+                "grpIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/1b.png",
+                "grpImage": "http://mobile.bgnsolutions.com/media/image/1b.jpg",
+                "ProductList": [
+                  {
+                    "prodID": "1",
+                    "grpID": "1",
+                    "prodName": "Time",
+                    "prodLongName": "TIME Magazine",
+                    "prodShortDesc": "TIME Magazine",
+                    "prodDesc": "TIME Magazine",
+                    "rating": "5",
+                    "prodIcon": "itime.png",
+                    "qrData": "",
+                    "isActive": "\u0001",
+                    "maker": "",
+                    "model": "",
+                    "MediaList": [
+                      {
+                        "mediaID": "1",
+                        "prodID": "1",
+                        "mediaURL": "http://mobile.bgnsolutions.com/media/image/20a.jpg",
+                        "fileSize": "0",
+                        "shortDesc": "",
+                        "longDesc": "",
+                        "mediaType": "1"
+                      },
+                      {
+                        "mediaID": "2",
+                        "prodID": "1",
+                        "mediaURL": "http://mobile.bgnsolutions.com/media/audio/eng_20c.mp3",
+                        "fileSize": "0",
+                        "shortDesc": "",
+                        "longDesc": "",
+                        "mediaType": "2"
+                      },
+                      {
+                        "mediaID": "3",
+                        "prodID": "1",
+                        "mediaURL": "http://mobile.bgnsolutions.com/media/video/eng_20a.mp4",
+                        "fileSize": "0",
+                        "shortDesc": "",
+                        "longDesc": "",
+                        "mediaType": "3"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "grpID": "2",
+                "catID": "1",
+                "grpName": "Cartton",
+                "grpIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/2b.png",
+                "grpImage": "http://mobile.bgnsolutions.com/media/image/2b.jpg",
+                "ProductList": []
+              }
+            ]
+          },
+          {
+            "catID": "3",
+            "catName": "Camera",
+            "catIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/3a.png",
+            "catImage": "http://mobile.bgnsolutions.com/media/image/3a.jpg",
+            "GroupList": [
+              {
+                "grpID": "4",
+                "catID": "3",
+                "grpName": "Cannon",
+                "grpIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/4b.png",
+                "grpImage": "http://mobile.bgnsolutions.com/media/image/4b.jpg",
+                "ProductList": []
+              },
+              {
+                "grpID": "5",
+                "catID": "3",
+                "grpName": "Nikon",
+                "grpIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/5b.png",
+                "grpImage": "http://mobile.bgnsolutions.com/media/image/5b.jpg",
+                "ProductList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "companyID": "2",
+        "comName": "Garry Company",
+        "taxID": "99999999",
+        "contactPerson": "Tu",
+        "phoneNumber": "0999999999",
+        "faxNumber": "023456789",
+        "logoIcon": "garry.png",
+        "logoImage": "i_garry.png",
+        "CatagoryList": [
+          {
+            "catID": "2",
+            "catName": "Computers",
+            "catIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/2a.png",
+            "catImage": "http://mobile.bgnsolutions.com/media/image/2a.jpg",
+            "GroupList": [
+              {
+                "grpID": "3",
+                "catID": "2",
+                "grpName": "Notebook",
+                "grpIcon": "http://mobile.bgnsolutions.com/media/image/thumbnail/3b.png",
+                "grpImage": "http://mobile.bgnsolutions.com/media/image/3b.jpg",
+                "ProductList": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+
+]]>
+    </string>
+    <string name="lbl_downloading_icons">Downloading icons...</string>
+    <string name="lbl_updating_db">Updating database...</string>
+    <string name="title_activity_main_fragment">MainFragmentActivity</string>
+    <string name="title_activity_company_fragment">CompanyFragmentActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_product">ProductActivity</string>
+    <string name="title_activity_photo_gallery">PhotoGalleryActivity</string>
+    <string name="title_activity_video">VideoActivity</string>
+    <string name="lbl_desc">Description</string>
+    <string name="lbl_title">Title</string>
+    <string name="title_activity_video_player">VideoPlayerActivity</string>
+    <string name="lbl_registration">Registration</string>
+    <string name="lbl_screen_name">Screen Name</string>
+    <string name="lbl_password">Password</string>
+    <string name="lbl_confirm_pw">Confirm Password</string>
+    <string name="lbl_firstname">First Name</string>
+    <string name="lbl_lastname">Last Name</string>
+    <string name="lbl_preferred_lang">Preferred Language</string>
+    <string name="lbl_line">Line</string>
+    <string name="lbl_skype">Skype</string>
+    <string name="lbl_tweeter">Tweeter</string>
+    <string name="lbl_instragram">Instragram</string>
+    <string name="lbl_facebook">Facebook</string>
+    <string name="lbl_mobile_phone">Mobile Phone</string>
+    <string name="lbl_office_phone">Office Phone</string>
+    <string name="lbl_confirm_email">Confirm Email</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="lbl_field_required">Required</string>
+    <string name="lbl_field_optional">Optional</string>
+    <string name="lbl_err_required_fields_missing">Please fill in all required fields before proceeding</string>
+    <string name="lbl_registering">Registering...</string>
+    <string name="lbl_err_plz_enter_valid_data">Please enter valid data before proceeding</string>
+    <string name="lbl_err_plz_enter_valid_email">Please enter valid email before proceeding</string>
+    <string name="lbl_err_email_not_equal">Email and confirmed email are not the same</string>
+    <string name="lbl_err_plz_connect_internet">Please connect to internet before proceeding</string>
+    <string name="lbl_msg_registering">Please wait, Registering...</string>
+    <string name="lbl_msg_registering_to_gcm">Registering to google cloud messaging...</string>
+    <string name="lbl_err_register_failed">Register failed, please try again</string>
+    <string name="title_activity_registration_activity2">PreShopping</string>
+    <string name="save">Save</string>
+    <string name="english">En</string>
+    <string name="thai">TH</string>
+    <string name="lbl_prefer_lang">Preferred language</string>
+    <string name="title_activity_favorite_setting">Favorite Setting</string>
+    <string name="lbl_err_invalid_photo">Invalid photo, please select a new one</string>
+    <string name="error_incorrect_email_or_password">Login failed, please check your email and password</string>
+    <string name="notification_summary_on">Click to disable notifications</string>
+    <string name="notification_summary_off">Click to eable notifications</string>
+
+    <string-array name="entries_list_notification">
+        <item>Sound only</item>
+        <item>Pop-up message only</item>
+        <item>Sound and pop-up message</item>
+    </string-array>
+    <string-array name="entryvalues_list_notification">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string name="no_filemanager_installed">No compatible file manager found</string>
+    <string name="file_name">File name</string>
+    <string name="open_title">Select file to open</string>
+    <string name="open_button">Open</string>
+    <string name="save_title">Select file to save</string>
+    <string name="save_button">Save</string>
+    <string name="pick_directory_title">Select a folder</string>
+    <string name="pick_directory_button">Use this folder</string>
+    <string name="get_content_title">Open using GET_CONTENT</string>
+    <string name="get_content_info">Display name: %1$s, File size: %2$s</string>
+    <string name="open_uri_button">Open URI</string>
+    <string name="lbl_existing_user">Existing User</string>
+    <string name="lbl_new_user">New User</string>
+    <string name="paging"></string>
+    <string name="explain">Swipe left or right and select</string>
+    <string name="title_activity_swap_device">SwapDeviceActivity</string>
+    <string name="lbl_swap_dev_confim">App has detected that you have signed in on a new device. Would you like to permanently swap to this device?\n\nPress button Ok if you would like to swap to this device, and update registration data such as your current mobie number in next screen.</string>
+    <string name="lbl_exit">Exit</string>
+    <string name="lbl_ok">Ok</string>
+    <string name="title_activity_manage_data_panel">Manage Data Panel</string>
+    <string name="lbl_data_summary">Data Uage Summary</string>
+    <string name="lbl_available_space">Total Available Space</string>
+    <string name="lbl_free_space">Free Space</string>
+    <string name="lbl_total_app_space">Total Application Space</string>
+    <string name="lbl_mp4">MP4</string>
+    <string name="lbl_mp3">MP3</string>
+    <string name="lbl_image">IMAGE</string>
+    <string name="lbl_manage_data">Manage Data Uage</string>
+	<string name="lbl_download_permision">You have selected %s files to download. Would you like to start downloading now?</string>
+	
+    <string name="scanner_activity">ZBar Scanner - Full Activity</string>
+    <string name="scanner_fragment_activity">ZBar Scanner - Full Fragment Activity</string>
+    <string name="simple_scanner_activity">ZBar Scanner - Simple Activity</string>
+    <string name="simple_scanner_fragment_activity">ZBar Scanner - Simple Fragment Activity</string>
+    <string name="simple_activity_sample">Simple Activity Sample</string>
+    <string name="simple_fragment_sample">Simple Fragment Sample</string>
+    <string name="activity_sample">Full Activity Sample</string>
+    <string name="fragment_sample">Full Fragment Sample</string>
+    <string name="toggle_flash">Flash</string>
+    <string name="flash_on">Flash [ON]</string>
+    <string name="flash_off">Flash [OFF]</string>
+    <string name="auto_focus_on">Auto Focus [ON]</string>
+    <string name="auto_focus_off">Auto Focus [OFF]</string>
+    <string name="formats">Formats</string>
+    <string name="choose_formats">Choose Formats</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="lbl_msg_update_register_data">Updating registration data, please wait...</string>
+    <string name="lbl_download_instruction">Please press Bank button to start downloading...</string>
+    <string name="favorite_setting">Favorite Setting</string>
+    <string name="lbl_msg_update_setting_data">Updating...</string>
+    <string name="current_promotion">Current Promotion</string>
+    <string name="lbl_no_thanks">No thanks</string>
+    <string name="lbl_yes">Yes</string>
+    
+    <string name="app_name">WebView Demo</string>
+    <string name="back">Back</string>
+    <string name="forward">Forward</string>
+    <string name="stop">Stop</string>
+    <string name="history">History</string>
+    <string name="go">Go</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="download">Download</string>
+    <string name="question">Do you want to save this file?</string>
+    <string name="result">File saved: </string>
+    <string name="clear">Clear</string>
+    <string name="close">Close</string>
+    <string name="stopping">stopping</string>
+    <string name="favicon">favicon</string>
+    <string name="noconnection">Internet connection not available</string>
+	<string name="error">Error</string>  
+    <string name="nosd">Storage not available</string>  
+    <string name="promotion_history">Promotion History List</string>  
+    <string name="lbl_hot_promotion">Hot Promotion</string>	
+    <string name="lbl_sync_data_dlg_title">New data available. Press Ok button to sync data</string>
+</resources>

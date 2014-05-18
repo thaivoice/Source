@@ -1,0 +1,72 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutRegister"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".RegistrationActivity" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:text="@string/lbl_registration" />
+
+
+        
+        <include layout="@layout/email" />
+        <include layout="@layout/confirm_email" />
+        <include layout="@layout/password" />
+        <include layout="@layout/confirm_password" />
+        <include layout="@layout/mobile_phone" />
+        <include layout="@layout/screen_name" />
+        <include layout="@layout/firstname" />
+        <include layout="@layout/lastname" />
+
+<!--         <include
+            layout="@layout/office_phone"
+            android:visibility="gone" />
+
+        
+
+        <include layout="@layout/facebook"
+            android:visibility="gone" />
+
+        <include layout="@layout/instragram"
+            android:visibility="gone" />
+
+        <include layout="@layout/tweeter"
+            android:visibility="gone" />
+
+        <include layout="@layout/skype"
+            android:visibility="gone" />
+
+        <include layout="@layout/line"
+            android:visibility="gone" />
+
+        <include layout="@layout/preferred_lang_2"
+            android:visibility="gone" /> -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="@string/register" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
