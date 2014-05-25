@@ -211,7 +211,7 @@ public class Utilities {
 	public static final String SETTING_NOTIFICATION_ONOFF = "notificationOnOff";
 	public static final String SETTING_ALERT_TYPE = "alertType";
 	public static final String SETTING_SOUND_FILE = "soundFile";
-    public static final float ICON_MAX_SIZE = 150; // in px.
+    public static final float ICON_MAX_SIZE = 150; // in dp
 
 	public enum MediaType {
 		IMAGE(1), MP3(2), MP4(3), OTHER(4);

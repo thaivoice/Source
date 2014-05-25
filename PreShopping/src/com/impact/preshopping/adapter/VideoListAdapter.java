@@ -1,11 +1,15 @@
 package com.impact.preshopping.adapter;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,6 +24,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.actionbarsherlock.R.color;
+import com.dudev.util.Constants;
 import com.dudev.util.Utilities;
 import com.impact.preshopping.R;
 import com.impact.preshopping.activity.VideoListActivity;
@@ -57,6 +62,7 @@ public class VideoListAdapter extends ArrayAdapter<HashMap<String, Object>> impl
 	private List<Integer> checkedBoxs = new ArrayList<Integer>();
 	private IOnItemClicked iOnItemClicked;
 	private IOnChecked iOnChecked;
+	private List<WeakReference<Bitmap>> weakRef = new ArrayList<WeakReference<Bitmap>>();
 
 	@Override
 	public int getCount() {
@@ -96,12 +102,20 @@ public class VideoListAdapter extends ArrayAdapter<HashMap<String, Object>> impl
 			txtLngDesc.setText(lngDesc);
 
 			if (!TextUtils.isEmpty(iconFilePath)) {
-				int sizeDpi = (int) Utilities.convertPixelsToDp(500, mContext);
-				Uri uri = Uri.parse(iconFilePath);
+				int sizeDpi = (int) Utilities.convertDpToPixel(Utilities.ICON_MAX_SIZE, mContext);
+//				Uri uri = Uri.parse(iconFilePath);
 				SquareImageView img = (SquareImageView) wholeView.findViewById(R.id.image1);
-				img.getLayoutParams().width = sizeDpi;
-				img.getLayoutParams().height = sizeDpi;
-				img.setImageURI(uri);
+//				img.getLayoutParams().width = sizeDpi;
+//				img.getLayoutParams().height = sizeDpi;
+//				img.setImageURI(uri);
+				
+				Bitmap b = getImageAsBitmap(Uri.parse(iconFilePath).getPath());
+				if (b != null) {
+	              img.getLayoutParams().width = sizeDpi;
+	              img.getLayoutParams().height = sizeDpi;
+				    img.setImageBitmap(b);
+				    weakRef.add(new WeakReference<Bitmap>(b));
+				}
 			}
 		} else {
 			wholeView = inflater.inflate(R.layout.video_list_item, null, false);
@@ -182,6 +196,21 @@ public class VideoListAdapter extends ArrayAdapter<HashMap<String, Object>> impl
 		return wholeView;
 	}
 
+	public static final String TAG = VideoListAdapter.class.getSimpleName();
+	private Bitmap getImageAsBitmap(String path) {
+        
+        if (!new File(path).exists()) {
+            Log.e(TAG, "file not exist.");
+            return null;
+        }
+        
+        float width = Utilities.convertDpToPixel(Utilities.ICON_MAX_SIZE, mContext);
+        Options options = Utilities.getOptions(path, (int) width, (int) width);
+        Bitmap b = BitmapFactory.decodeFile(path, options);
+
+        return b;
+    }
+	
 	class VideoClickedListener implements OnClickListener {
 		private int position;
 
@@ -207,4 +236,6 @@ public class VideoListAdapter extends ArrayAdapter<HashMap<String, Object>> impl
 	public void onExitActivity() {
 
 	}
+	
+	
 }
