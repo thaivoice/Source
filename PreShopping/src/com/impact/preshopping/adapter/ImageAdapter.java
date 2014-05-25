@@ -1,13 +1,18 @@
 package com.impact.preshopping.adapter;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.dudev.util.Utilities;
 import com.impact.preshopping.CompanyFragmentActivity.IOnItemClicked;
 import com.impact.preshopping.R;
 import com.impact.preshopping.fragment.CategoryFragment.IOnItemClicked_Category;
@@ -31,7 +37,8 @@ public class ImageAdapter extends BaseAdapter {
 	}
 
 	private Context context;
-	private List<WeakReference<GridViewItem>> weakRef = new ArrayList<WeakReference<GridViewItem>>();
+	private List<WeakReference<Bitmap>> weakRef = new ArrayList<WeakReference<Bitmap>>();
+	public static final String TAG = ImageAdapter.class.getSimpleName();
 	private List<HashMap<String, String>> data;
 	private ItemType type;
 	public static final String NAME = "name";
@@ -103,7 +110,13 @@ public class ImageAdapter extends BaseAdapter {
 		ImageView imageView = (ImageView) gridView.findViewById(R.id.image1);
 		
 		if (!TextUtils.isEmpty(data.get(position).get(IMG_FILE_PATH))) {
-			imageView.setImageURI(Uri.parse(data.get(position).get(IMG_FILE_PATH)));
+			
+			Bitmap b = getImageAsBitmap(Uri.parse(data.get(position).get(IMG_FILE_PATH)).getPath());
+			
+			if (b != null) {
+			    imageView.setImageBitmap(b);
+			    weakRef.add(new WeakReference<Bitmap>(b));
+			}
 		} 
 		
 		imageView.setOnClickListener(new OnClickListener() {
@@ -136,7 +149,20 @@ public class ImageAdapter extends BaseAdapter {
 		return gridView;
 	}
 
-	public void setiCategory(IOnItemClicked_Category iCategory) {
+	private Bitmap getImageAsBitmap(String path) {
+	    
+	    if (!new File(path).exists()) {
+	        Log.e(TAG, "file not exist.");
+	        return null;
+	    }
+	    
+	    float width = Utilities.convertDpToPixel(Utilities.ICON_MAX_SIZE, context);
+        Options options = Utilities.getOptions(path, (int) width, (int) width);
+        Bitmap b = BitmapFactory.decodeFile(path, options);
+
+        return b;
+    }
+    public void setiCategory(IOnItemClicked_Category iCategory) {
 		this.iCategory = iCategory;
 	}
 

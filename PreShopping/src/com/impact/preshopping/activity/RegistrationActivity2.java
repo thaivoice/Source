@@ -85,6 +85,8 @@ public class RegistrationActivity2 extends Activity {
 	private boolean swappingDevice;
 	public static final String TAG = RegistrationActivity2.class.getSimpleName();
 	private String existingMobileNumber;
+    private String password;
+    private String email;
 
 	@Override
 	public boolean onOptionsItemSelected(android.view.MenuItem item) {
@@ -140,7 +142,8 @@ public class RegistrationActivity2 extends Activity {
 		regInfo = Utilities.getRegInfo(getApplicationContext());
 		Object avatar = null;
 		if (regInfo != null && regInfo.size() > 0) {
-			String email = regInfo.get(Utilities.REG_EMAIL) == null ? "" : regInfo.get(Utilities.REG_EMAIL).toString();
+		    password = regInfo.get(Utilities.REG_PASSWORD) == null ? "" : regInfo.get(Utilities.REG_PASSWORD).toString();
+			email = regInfo.get(Utilities.REG_EMAIL) == null ? "" : regInfo.get(Utilities.REG_EMAIL).toString();
 			editTextEmail.setText(email);
 			String facebook = regInfo.get(Utilities.REG_FACEBOOK) == null ? "" : regInfo.get(Utilities.REG_FACEBOOK).toString();
 			editTextFacebook.setText(facebook);
@@ -332,6 +335,8 @@ public class RegistrationActivity2 extends Activity {
 				Intent i = new Intent(getApplicationContext(), LoginActivity.class);
 				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				i.putExtra(LoginActivity.EXTRA_FORCE_LOGIN, true);
+				i.putExtra(Utilities.REG_PASSWORD, password);
+				i.putExtra(Utilities.REG_EMAIL, email);
 				startActivity(i);
 			}
 			

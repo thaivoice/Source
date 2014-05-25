@@ -14,7 +14,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
-public class SyncDataService extends IntentService{
+public class SyncDataService extends IntentService {
 
     public static final String TAG = SyncDataService.class.getSimpleName();
     public static final String SHOW_SYNC_DATA_DLG = "SHOW_SYNC_DATA_DLG";

@@ -313,7 +313,7 @@ public abstract class BaseActivity extends SherlockActivity {
 
 //        SpannableString sQrReader = new SpannableString("QR Reader");
 //        sQrReader.setSpan(new ForegroundColorSpan(Color.WHITE), 0, sQrReader.length(), 0);
-        subMenu1.add("QR Reader").setIntent(qr);
+        subMenu1.add("QR/Barcode Reader").setIntent(qr);
         
 //        SpannableString sPromotion = new SpannableString("Promotion History");
 //        sPromotion.setSpan(new ForegroundColorSpan(Color.WHITE), 0, sPromotion.length(), 0);

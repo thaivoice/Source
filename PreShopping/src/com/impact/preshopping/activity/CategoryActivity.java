@@ -62,7 +62,7 @@ public class CategoryActivity extends BaseActivity implements IOnItemClicked{
     }
     private void scheduleAlarm() {
         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.currentThreadTimeMillis(), 30 * 1000, getPendingIntent(getApplicationContext(), 1234));
+        am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.currentThreadTimeMillis(), 15*60 * 1000, getPendingIntent(getApplicationContext(), 1234));
     }
     
 	@Override

@@ -211,6 +211,7 @@ public class Utilities {
 	public static final String SETTING_NOTIFICATION_ONOFF = "notificationOnOff";
 	public static final String SETTING_ALERT_TYPE = "alertType";
 	public static final String SETTING_SOUND_FILE = "soundFile";
+    public static final float ICON_MAX_SIZE = 150; // in px.
 
 	public enum MediaType {
 		IMAGE(1), MP3(2), MP4(3), OTHER(4);
@@ -1346,7 +1347,7 @@ public class Utilities {
 		Uri uri = (Uri) info.get("AVATAR_URI");
 		if (uri != null) {
 			info.remove("AVATAR_URI");
-			float width = Utilities.convertDpToPixel(150, context);
+			float width = Utilities.convertDpToPixel(ICON_MAX_SIZE, context);
 			Options options = Utilities.getOptions(uri.getPath(), (int) width, (int) width);
 			Bitmap b = BitmapFactory.decodeFile(uri.getPath(), options);
 

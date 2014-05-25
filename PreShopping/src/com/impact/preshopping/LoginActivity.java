@@ -120,6 +120,10 @@ public class LoginActivity extends Activity {
 		});
 		
 		if (forceLogin) {
+		    
+	        mEmail = getIntent().getExtras().getString(Utilities.REG_EMAIL);
+	        mPassword = getIntent().getExtras().getString(Utilities.REG_PASSWORD);
+
 		    login();
 		}
 	}
@@ -206,6 +210,7 @@ public class LoginActivity extends Activity {
         mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
         showProgress(true);
         mAuthTask = new UserLoginTask();
+        
         mAuthTask.execute(mEmail, mPassword);
     }
 

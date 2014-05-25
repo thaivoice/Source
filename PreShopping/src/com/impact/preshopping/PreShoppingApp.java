@@ -4,6 +4,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import tr.com.turkcellteknoloji.turkcellupdater.Message;
+import tr.com.turkcellteknoloji.turkcellupdater.UpdaterDialogManager;
 import net.appositedesigns.fileexplorer.FileExplorerApp;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -13,8 +15,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 
-public class PreShoppingApp extends FileExplorerApp {
+public class PreShoppingApp extends FileExplorerApp implements UpdaterDialogManager.UpdaterUiListener{
     
     private boolean isAdminMode;
 
@@ -66,5 +69,21 @@ public class PreShoppingApp extends FileExplorerApp {
     private PendingIntent getPendingIntent(Context context, int id) {
         Intent intent =  new Intent(context, SyncDataService.class);
         return PendingIntent.getService(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    @Override
+    public void onExitApplication() {
+        Log.w("updater", "onExitApplication");
+    }
+
+    @Override
+    public void onUpdateCheckCompleted() {
+        Log.w("updater", "onUpdateCheckCompleted");
+    }
+
+    @Override
+    public boolean onDisplayMessage(Message message) {
+        Log.w("updater", "onDisplayMessage");
+        return false;
     }
 }

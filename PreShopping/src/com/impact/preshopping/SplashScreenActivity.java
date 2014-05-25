@@ -1,27 +1,19 @@
 package com.impact.preshopping;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-import org.json.JSONObject;
 
 import tr.com.turkcellteknoloji.turkcellupdater.Message;
 import tr.com.turkcellteknoloji.turkcellupdater.UpdaterDialogManager;
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.ActivityManager.RunningTaskInfo;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
