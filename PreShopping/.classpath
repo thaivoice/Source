@@ -7,8 +7,6 @@
 	<classpathentry exported="true" kind="lib" path="libs/joda-time-2.3.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/actionbarsherlock"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/google-play-services_lib"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="FileExplorerLib"/>
@@ -17,8 +15,10 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/android-support-v7-appcompat"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/core"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/google-play-services"/>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/file-explorer"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/HomeActivity"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
