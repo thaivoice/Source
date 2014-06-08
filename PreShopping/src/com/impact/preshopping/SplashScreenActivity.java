@@ -167,7 +167,7 @@ public class SplashScreenActivity extends Activity implements UpdaterDialogManag
     private Message message;
 
     private void checkAppUpdate() {
-        UpdaterDialogManager updaterUI = new UpdaterDialogManager("http://www.preshopping.net/update_url.json");
+        UpdaterDialogManager updaterUI = new UpdaterDialogManager(getString(R.string.application_endpoint) + Constants.TAG_APP_UPDATER_URL);
         updaterUI.setPostProperties(true);
         updaterUI.startUpdateCheck(SplashScreenActivity.this, SplashScreenActivity.this);
     }

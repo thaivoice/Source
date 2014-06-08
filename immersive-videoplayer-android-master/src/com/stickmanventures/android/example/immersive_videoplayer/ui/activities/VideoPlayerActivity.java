@@ -109,7 +109,7 @@ public class VideoPlayerActivity extends BaseActivity {
 		// Attach the media controller
 		videoView.setVideoURI(Uri.parse(video.getUrl()));
 ////		videoView.setVideoPath("http://171.98.28.136:86/vod.html?src=Large-149MB");
-//		videoView.setVideoURI(Uri.parse("http://171.98.28.136:86/High/Large-149MB.mp4"));
+//		videoView.setVideoURI(Uri.parse("http://preshopping.net:86/High/VDO7809-20140608100647-eng_4b.mp4"));
         videoView.setMediaController(controller);
         
         int videoPosition = 0;

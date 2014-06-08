@@ -1,5 +1,7 @@
 package com.impact.preshopping;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,8 +26,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Html;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -438,12 +441,16 @@ public class LoginActivity extends Activity {
 				data.put(Utilities.REG_IMEI, obj.getString(Utilities.REG_IMEI));
 				data.put(Utilities.REG_DEVICE_ID, obj.getString(Utilities.REG_DEVICE_ID));
 				data.put(Utilities.REG_DEVICE_TYPE, obj.getString(Utilities.REG_DEVICE_TYPE));
-				data.put(Utilities.REG_USER_AVATAR, obj.getString(Utilities.REG_USER_AVATAR));
+				data.put(Utilities.REG_USER_AVATAR, obj.getString(Utilities.REG_USER_AVATAR).trim());
 				
-//				byte[] img = Base64.decode(obj.getString(Utilities.REG_USER_AVATAR), 0);
-//				byte[] avatarText = Base64.decode(obj.getString(Utilities.REG_USER_AVATAR_TEXT), 0);
-//				FileUtils.writeByteArrayToFile(new File(Utilities.getAppFolder_ExtSd(getApplicationContext()) + "/avatar.jpg"), img);
-//				FileUtils.writeByteArrayToFile(new File(Utilities.getAppFolder_ExtSd(getApplicationContext()) + "/avatarText.jpg"), avatarText);
+//				try {
+//                    byte[] img = Base64.decode(obj.getString(Utilities.REG_USER_AVATAR).trim(), 0);
+//                    FileUtils.writeByteArrayToFile(new File("/storage/sdcard0/avatar.jpg"), img);
+//
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
 				
 				Utilities.insertNewRegInfo(getApplicationContext(), data);
 				
