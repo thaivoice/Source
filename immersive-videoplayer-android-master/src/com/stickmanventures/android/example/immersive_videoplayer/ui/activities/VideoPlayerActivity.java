@@ -1,9 +1,5 @@
 package com.stickmanventures.android.example.immersive_videoplayer.ui.activities;
 
-import com.stickmanventures.android.example.immersive_videoplayer.ImmersiveVideoplayer;
-import com.stickmanventures.android.example.immersive_videoplayer.R;
-import com.stickmanventures.android.example.immersive_videoplayer.entities.Video;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -11,6 +7,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +18,10 @@ import android.view.WindowManager;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
+
+import com.stickmanventures.android.example.immersive_videoplayer.ImmersiveVideoplayer;
+import com.stickmanventures.android.example.immersive_videoplayer.R;
+import com.stickmanventures.android.example.immersive_videoplayer.entities.Video;
 
 public class VideoPlayerActivity extends BaseActivity {
 
@@ -108,9 +109,15 @@ public class VideoPlayerActivity extends BaseActivity {
 		
 		// Attach the media controller
 		videoView.setVideoURI(Uri.parse(video.getUrl()));
-////		videoView.setVideoPath("http://171.98.28.136:86/vod.html?src=Large-149MB");
-//		videoView.setVideoURI(Uri.parse("http://preshopping.net:86/High/VDO7809-20140608100647-eng_4b.mp4"));
         videoView.setMediaController(controller);
+        
+        videoView.setOnCompletionListener(new OnCompletionListener() {
+			
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				finish();
+			}
+		});
         
         int videoPosition = 0;
         if (savedInstanceState != null)
