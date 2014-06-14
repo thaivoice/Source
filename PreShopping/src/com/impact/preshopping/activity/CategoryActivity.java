@@ -54,29 +54,22 @@ public class CategoryActivity extends BaseActivity implements IOnItemClicked{
 		TextView title = (TextView) findViewById(R.id.textViewTitle);
 		title.setText("Product Category List");
 		
-		scheduleAlarm();
+		if (Boolean.valueOf(getString(R.string.app_no_company_preset))) {
+			scheduleAlarm();	
+		}
+		
 	}
     private PendingIntent getPendingIntent(Context context, int id) {
         Intent intent =  new Intent(context, SyncDataService.class);
         return PendingIntent.getService(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
+    
     private void scheduleAlarm() {
         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.currentThreadTimeMillis(), 15*60 * 1000, getPendingIntent(getApplicationContext(), 1234));
+        int interval = Integer.parseInt(getString(R.string.sync_data_interval));
+        am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.currentThreadTimeMillis(), interval * 60 * 1000, getPendingIntent(getApplicationContext(), 1234));
     }
     
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-	}
-
-	@Override
-	public void onBackPressed() {
-		// TODO Auto-generated method stub
-		super.onBackPressed();
-	}
-
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -172,7 +165,10 @@ public class CategoryActivity extends BaseActivity implements IOnItemClicked{
 		
 		startActivity(i);
 		overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-		finish();
+		
+		if (!Boolean.valueOf(getString(R.string.app_no_company_preset))) {
+			finish();	
+		}
 	}
 
 

@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.GridView;
@@ -18,6 +22,7 @@ import com.impact.preshopping.BaseActivity;
 import com.impact.preshopping.CompanyFragmentActivity.IOnItemClicked;
 import com.impact.preshopping.PreShoppingApp;
 import com.impact.preshopping.R;
+import com.impact.preshopping.SyncDataService;
 import com.impact.preshopping.adapter.ImageAdapter;
 import com.impact.preshopping.db.MySqlHelper;
 
@@ -37,18 +42,21 @@ public class CompanyActivity extends BaseActivity implements IOnItemClicked{
 //		intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
 //		startActivityForResult(intent, 0);
 //		IntentIntegrator.initiateScan(this);    // `this` is the current Activity or Context
+		
+		scheduleAlarm();
 	}
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-	}
-
-	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
-	}
-
+    private void scheduleAlarm() {
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        int interval = Integer.parseInt(getString(R.string.sync_data_interval));
+        am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.currentThreadTimeMillis(), interval * 60 * 1000, getPendingIntent(getApplicationContext(), 1234));
+    }
+    
+    private PendingIntent getPendingIntent(Context context, int id) {
+        Intent intent =  new Intent(context, SyncDataService.class);
+        return PendingIntent.getService(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+    
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -132,7 +140,6 @@ public class CompanyActivity extends BaseActivity implements IOnItemClicked{
 		
 		startActivity(i);
 		overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-		finish();
 	}
 
 
