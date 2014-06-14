@@ -1023,8 +1023,6 @@ public abstract class BaseActivity extends SherlockActivity {
             downloadTask = null;
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             prefs.edit().putBoolean("APP_STATUS", false).commit();
-            menuItem.setActionView(null);
-            Log.e(TAG, "onPostExecute...");
 
             if (result == -1) {
                 showNoSpaceLeftDialog();

@@ -57,7 +57,6 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 	private List<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
 	private List<Integer> checkedBoxs = new ArrayList<Integer>();
 	private VideoDownloadTaskReceiver downloadTaskReceiver;
-//	public static final List<Integer> seenItemList = new ArrayList<Integer>();
 	public static int seenItemPos = 0;
 
 	private int mProgress = 100;
