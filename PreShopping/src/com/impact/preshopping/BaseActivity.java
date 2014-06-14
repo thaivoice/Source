@@ -1249,7 +1249,9 @@ public abstract class BaseActivity extends SherlockActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
-                BusProvider.getInstance().post(new VideoDownloadCompletedEvent());            }
+                BusProvider.getInstance().post(new VideoDownloadCompletedEvent());            
+                
+            }
         });
         
         // builder.setNegativeButton("Close", new
