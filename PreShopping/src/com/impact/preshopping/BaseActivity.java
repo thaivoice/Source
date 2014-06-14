@@ -33,7 +33,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -45,20 +44,16 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
-import android.provider.SyncStateContract.Constants;
-import android.text.Html;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
-import android.view.Menu;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.SubMenu;
+import com.dudev.util.BusProvider;
 import com.dudev.util.DownloadImageThread;
 import com.dudev.util.DownloadImageThread.ImageType;
 import com.dudev.util.RequestType;
@@ -152,8 +147,10 @@ public abstract class BaseActivity extends SherlockActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.text);
-        // ((TextView)
-        // findViewById(R.id.text)).setText(R.string.submenus_content);
+        
+		// Register self with the only bus that we're using
+		BusProvider.getInstance().register(this);
+        
         skipCompanyPage = Boolean.valueOf(getString(R.string.app_no_company_preset));
         String clazzName = "";
         if (skipCompanyPage) {
@@ -1030,8 +1027,7 @@ public abstract class BaseActivity extends SherlockActivity {
                 if (isCancelled()) {
                     ; // most likely ignore for now!
                 } else {
-                    Intent intent = new Intent("VIDEO_DOWNLOAD_TASK_COMPLETE");
-                    getApplicationContext().sendBroadcast(intent);
+                    BusProvider.getInstance().post(new VideoDownloadCompletedEvent());
                 }
             }
         }
@@ -1253,12 +1249,9 @@ public abstract class BaseActivity extends SherlockActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
-
-                Intent intent = new Intent("VIDEO_DOWNLOAD_TASK_COMPLETE");
-                getApplicationContext().sendBroadcast(intent);
-
-            }
+                BusProvider.getInstance().post(new VideoDownloadCompletedEvent());            }
         });
+        
         // builder.setNegativeButton("Close", new
         // DialogInterface.OnClickListener() {
         // public void onClick(DialogInterface dialog, int whichButton) {

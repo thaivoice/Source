@@ -10,10 +10,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,9 +18,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
-import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.MenuItem;
@@ -33,19 +28,15 @@ import com.dudev.util.Utilities.MediaType;
 import com.impact.preshopping.BaseActivity;
 import com.impact.preshopping.PreShoppingApp;
 import com.impact.preshopping.R;
-import com.impact.preshopping.R.color;
-import com.impact.preshopping.VideoDownloadTaskReceiver;
-import com.impact.preshopping.VideoDownloadTaskReceiver.IOnDownloadComplete;
-import com.impact.preshopping.adapter.SquareImageView;
+import com.impact.preshopping.VideoDownloadCompletedEvent;
 import com.impact.preshopping.adapter.VideoListAdapter;
 import com.impact.preshopping.adapter.VideoListAdapter.IOnChecked;
 import com.impact.preshopping.adapter.VideoListAdapter.IOnItemClicked;
-import com.impact.preshopping.db.MySqlHelper;
+import com.squareup.otto.Subscribe;
 import com.stickmanventures.android.example.immersive_videoplayer.ImmersiveVideoplayer;
 import com.stickmanventures.android.example.immersive_videoplayer.entities.Video;
-import com.loopj.android.http.*;
 
-public class VideoListActivity extends BaseActivity implements IOnItemClicked, IOnChecked, IOnDownloadComplete {
+public class VideoListActivity extends BaseActivity implements IOnItemClicked, IOnChecked {
 
 	public interface IOnExit {
 		public void onExitActivity();
@@ -57,7 +48,6 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 	private Bundle map;
 	private List<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
 	private List<Integer> checkedBoxs = new ArrayList<Integer>();
-	private VideoDownloadTaskReceiver downloadTaskReceiver;
 	public static int seenItemPos = 0;
 
 	private int mProgress = 100;
@@ -102,23 +92,8 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 			backFromQrJob = true;
 		}
 		
-
-		downloadTaskReceiver = new VideoDownloadTaskReceiver(this);
 		listView = (ListView) findViewById(R.id.listView1);
 		
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		try {
-			if (downloadTaskReceiver != null) {
-				unregisterReceiver(downloadTaskReceiver);
-				downloadTaskReceiver = null;
-			}
-		} catch (Exception e) {
-			Log.e(TAG, "" + e);
-		}
 	}
 
 	@Override
@@ -134,9 +109,6 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 		if (!list.isEmpty()) {
 			list.clear();
 		}
-		
-		IntentFilter filter = new IntentFilter("VIDEO_DOWNLOAD_TASK_COMPLETE");
-		registerReceiver(downloadTaskReceiver, filter);
 		
 		// Get product detail part for list header.
 		List<String> result = Utilities.getProdInfo(getApplicationContext(), prodId);
@@ -381,14 +353,14 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 		}
 	}
 
-	@Override
-	public void onDownloadComplete() {
+	@Subscribe
+	public void onDownloadComplete(VideoDownloadCompletedEvent e) {
 
 		checkedBoxs.clear();
 		Intent group = getPreviousIntent();
 		group.putExtra("EXTRA_INFO", map);
 		startActivity(group);
-		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 		finish();
 	}
 
