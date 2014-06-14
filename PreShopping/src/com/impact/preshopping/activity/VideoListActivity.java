@@ -43,6 +43,7 @@ import com.impact.preshopping.adapter.VideoListAdapter.IOnItemClicked;
 import com.impact.preshopping.db.MySqlHelper;
 import com.stickmanventures.android.example.immersive_videoplayer.ImmersiveVideoplayer;
 import com.stickmanventures.android.example.immersive_videoplayer.entities.Video;
+import com.loopj.android.http.*;
 
 public class VideoListActivity extends BaseActivity implements IOnItemClicked, IOnChecked, IOnDownloadComplete {
 
@@ -348,6 +349,17 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 			intent.putExtra(ImmersiveVideoplayer.EXTRA_LAYOUT, "0");
 			intent.putExtra(Video.class.getName(), video);
 			startActivity(intent);
+			
+//			AsyncHttpClient client = new AsyncHttpClient();
+//			client.get(uri.toString(), new AsyncHttpResponseHandler() {
+//			    @Override
+//			    public void onSuccess(String response) {
+//			        System.out.println(response);
+//			        System.out.println("Welcome to Tutorialspoint.com".matches("(.*)Tutorials(.*)"));
+//			    }
+//			});
+			
+			
 		} catch (ClassNotFoundException e) {
 			Log.e(TAG, "" + e);
 		}

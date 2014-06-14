@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.impact.preshopping"
-    android:versionCode="3"
-    android:versionName="3.0">
+    android:versionCode="4"
+    android:versionName="4.0">
 
     <!-- Donut-specific flags which allow us to run on any dpi screens. -->
     <supports-screens
@@ -223,7 +223,7 @@
         <activity android:name="com.dudev.util.webview.WebViewDemoActivity" android:launchMode="singleInstance"></activity>
         <activity android:name="PromotionHistoryListActivity"></activity>
         <service android:name="SyncDataService"></service>
-        
+        <activity android:name="net.hockeyapp.android.UpdateActivity" />
     </application>
 
 </manifest>

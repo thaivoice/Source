@@ -1,3 +1,4 @@
+
 package com.impact.preshopping;
 
 import java.util.HashMap;
@@ -25,22 +26,43 @@ import com.impact.preshopping.activity.CategoryActivity;
 import com.impact.preshopping.activity.CompanyActivity;
 import com.stickmanventures.android.example.immersive_videoplayer.ImmersiveVideoplayer;
 import com.stickmanventures.android.example.immersive_videoplayer.entities.Video;
+import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.UpdateManager;
 
-public class SplashScreenActivity extends Activity implements UpdaterDialogManager.UpdaterUiListener {
+public class SplashScreenActivity extends Activity implements
+        UpdaterDialogManager.UpdaterUiListener {
 
     protected int splashTime = 4000;
     private SharedPreferences prefs;
     private View splashLogo;
     private boolean skipCompanyPage;
-
+    private static final String APP_ID = "f50d024c25e96270b41119e2343765d3";
+    
+    
     @Override
     @SuppressWarnings("static-access")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         checkAppUpdate();
+        checkForUpdates();
     }
-    
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkForCrashes();
+    }
+
+    private void checkForCrashes() {
+        CrashManager.register(this, APP_ID);
+    }
+
+    private void checkForUpdates() {
+        // Remove this for store builds!
+        UpdateManager.register(this, APP_ID);
+    }
+
     private void initializeUi() {
         skipCompanyPage = Boolean.valueOf(getString(R.string.app_no_company_preset));
 
@@ -54,7 +76,8 @@ public class SplashScreenActivity extends Activity implements UpdaterDialogManag
 
             for (RunningTaskInfo taskInfo : tasksInfo) {
 
-                if (ourAppPackageName.equals(taskInfo.baseActivity.getPackageName()) && taskInfo.numActivities == 1) {
+                if (ourAppPackageName.equals(taskInfo.baseActivity.getPackageName())
+                        && taskInfo.numActivities == 1) {
                     skipSplash = false;
                     break;
                 }
@@ -69,7 +92,8 @@ public class SplashScreenActivity extends Activity implements UpdaterDialogManag
                 Video video = new Video(strUri);
                 video.setDescription("");
 
-                Intent intent = new Intent(getApplicationContext(),
+                Intent intent = new Intent(
+                        getApplicationContext(),
                         Class.forName("com.stickmanventures.android.example.immersive_videoplayer.ui.activities.VideoPlayerActivity"));
                 intent.putExtra(ImmersiveVideoplayer.EXTRA_LAYOUT, "0");
                 intent.putExtra(Video.class.getName(), video);
@@ -102,11 +126,14 @@ public class SplashScreenActivity extends Activity implements UpdaterDialogManag
                         if (prefs.getBoolean(Constants.TAG_REGISTERED_SUCCESS, false)) {
 
                             if (prefs.getBoolean(Constants.TAG_HAS_LOGGED_IN, false)) {
-                                Intent login = new Intent(getApplicationContext(), skipCompanyPage ? CategoryActivity.class : CompanyActivity.class);
+                                Intent login = new Intent(getApplicationContext(),
+                                        skipCompanyPage ? CategoryActivity.class
+                                                : CompanyActivity.class);
                                 login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(login);
                             } else {
-                                Intent company = new Intent(getApplicationContext(), LoginActivity.class);
+                                Intent company = new Intent(getApplicationContext(),
+                                        LoginActivity.class);
                                 // Intent company = new
                                 // Intent(getApplicationContext(),
                                 // RegistrationActivity.class);
@@ -142,7 +169,8 @@ public class SplashScreenActivity extends Activity implements UpdaterDialogManag
 
             companies.add("0");
         }
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(getApplicationContext());
         Log.i("set", "" + prefs.getStringSet("by_company", companies));
 
         Set<String> compSet = prefs.getStringSet("by_company", companies);
@@ -167,7 +195,8 @@ public class SplashScreenActivity extends Activity implements UpdaterDialogManag
     private Message message;
 
     private void checkAppUpdate() {
-        UpdaterDialogManager updaterUI = new UpdaterDialogManager("http://www.preshopping.net/update_url.json");
+        UpdaterDialogManager updaterUI = new UpdaterDialogManager(
+                getString(R.string.application_endpoint) + Constants.TAG_APP_UPDATER_URL);
         updaterUI.setPostProperties(true);
         updaterUI.startUpdateCheck(SplashScreenActivity.this, SplashScreenActivity.this);
     }
