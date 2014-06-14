@@ -13,11 +13,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.dudev.util.Constants;
@@ -57,14 +60,26 @@ public class GcmIntentService extends IntentService {
 
                 Log.i(TAG, "Received: " + extras.toString());
                 String startDate = extras.getString(PROMOTION_START_DATE);
-                DateTime sDate = new DateTime(startDate);
+                
                 DateTime tDate = new DateTime();
-
+                String endDate = extras.getString(PROMOTION_END_DATE);
+                DateTime eDate = new DateTime(endDate);
+                
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+				String mEmail = prefs.getString(Utilities.EMAIL, "");
+				String eMail = extras.getString("eMail");
+				
+				boolean isValidPush = true;
+				if (!TextUtils.isEmpty(eMail)) {
+					if (!eMail.equals(mEmail)) {
+						isValidPush = false;
+					}
+				}
+                
                 // Make sure the it is not an old promotion pushed in.
-                if (DateTimeComparator.getDateOnlyInstance().compare(sDate, tDate) >= 0) {
+                if (isValidPush && (DateTimeComparator.getDateOnlyInstance().compare(eDate, tDate) >= 0)) {
 
                     // extract data and store it in database.
-                    String endDate = extras.getString(PROMOTION_END_DATE);
                     String promotionDesc = extras.getString(PROMOTION_DESC);
                     String promotionUrl = extras.getString(PROMOTION_URL);
                     String promotionAlertSound = extras.getString(PROMOTION_ALERT_SOUND);
