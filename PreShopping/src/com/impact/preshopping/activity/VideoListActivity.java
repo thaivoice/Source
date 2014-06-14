@@ -263,7 +263,12 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 				VideoListActivity.super.onBackPressed();
 			}
 		} else {
-			VideoListActivity.super.onBackPressed();
+			
+			if (item == null) { // called by onBackpressed method.
+				VideoListActivity.super.onBackPressed();
+			} else {
+				VideoListActivity.super.onOptionsItemSelected(item);
+			}
 		}
 
 	}
