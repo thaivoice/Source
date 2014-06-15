@@ -255,7 +255,6 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 				dialog.dismiss();
 				downloadTask = new DownloadVideoTask();
 				downloadTask.execute(list);
-//				VideoListActivity.super.onBackPressed();
 			}
 		});
 		alertDialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
@@ -279,21 +278,14 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 
 		startDownload(item);
 		return true;
-
-		// return super.onOptionsItemSelected(item);
 	}
 
 	@Override
 	public void onItemClicked(int position) {
 		Log.i(TAG, "" + position);
-//		if (!seenItemList.contains(position)) {
-//			seenItemList.add(position);
-//		}
 		
 		// Remember last seen item position on the list.
 		seenItemPos = position;
-		
-//		listView.getChildAt(position).setBackgroundColor(color.abs__bright_foreground_holo_light);
 		
 		try {
 			Intent intent = new Intent(VideoListActivity.this, Class.forName("com.stickmanventures.android.example.immersive_videoplayer.ui.activities.VideoPlayerActivity"));
@@ -326,17 +318,7 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 			intent.putExtra(ImmersiveVideoplayer.EXTRA_LAYOUT, "0");
 			intent.putExtra(Video.class.getName(), video);
 			startActivity(intent);
-			
-//			AsyncHttpClient client = new AsyncHttpClient();
-//			client.get(uri.toString(), new AsyncHttpResponseHandler() {
-//			    @Override
-//			    public void onSuccess(String response) {
-//			        System.out.println(response);
-//			        System.out.println("Welcome to Tutorialspoint.com".matches("(.*)Tutorials(.*)"));
-//			    }
-//			});
-			
-			
+	
 		} catch (ClassNotFoundException e) {
 			Log.e(TAG, "" + e);
 		}
