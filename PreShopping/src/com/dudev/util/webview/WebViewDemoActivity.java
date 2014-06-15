@@ -344,9 +344,7 @@ public class WebViewDemoActivity extends Activity {
         // handles unrecoverable errors
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(WebViewDemoActivity.this);
-            builder.setMessage(description).setPositiveButton((R.string.ok), null).setTitle("onReceivedError");
-            builder.show();
+            Toast.makeText(getApplicationContext(), "" + description, Toast.LENGTH_SHORT).show();
         }
 
     }

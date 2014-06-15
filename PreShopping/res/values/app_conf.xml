@@ -5,5 +5,5 @@
     <string name="application_endpoint">http://www.preshopping.net/</string>
     <string name="addmin_acc_name">Admin</string>
     <string name="addmin_password">preshopping04</string>
-    <string name="sync_data_interval">1</string>
+    <string name="sync_data_interval">15</string>
 </resources>
