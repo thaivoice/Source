@@ -12,7 +12,7 @@ public final class Constants {
 	public static final String TAG_RESPONSE_CODE_SUCCESS = "1";
 	public static final int SWAP_DEVICE_CODE = -7;
 	
-	// Url...
+	// Web service methods.
 	public static final String TAG_REGISTER_METHOD = "register.php";
 	public static final String TAG_CHECK_SCREEN_NAME_METHOD = "checkscreenname.php";
 	public static final String TAG_CHECK_EMAIL_METHOD = "checkemail.php";
@@ -23,6 +23,7 @@ public final class Constants {
 	public static final String TAG_GET_DATA = "getdata.php";
 	public static final String TAG_GET_DBVERSION_METHOD = "getversion.php";
 	public static final String TAG_APP_UPDATER_URL = "android_update_url.json";
+	
 	// Flag for alert type.
 	public static final String FLAG_ALERT_TYPE_SOUND_ONLY = "1";
 	public static final String FLAG_ALERT_TYPE_MSG_ONLY = "2";

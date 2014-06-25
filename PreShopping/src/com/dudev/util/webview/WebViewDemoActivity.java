@@ -23,10 +23,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Locale;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
@@ -49,10 +51,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -63,7 +63,6 @@ import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebIconDatabase;
 import android.webkit.WebSettings;
-import android.webkit.WebSettings.PluginState;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
@@ -79,43 +78,40 @@ import com.impact.preshopping.GcmIntentService;
 import com.impact.preshopping.R;
 
 public class WebViewDemoActivity extends Activity {
+
     private WebView webview;
-
     private ProgressBar progressBar;
-
     private EditText urlEditText;
-
     private List<Link> historyStack;
-
     private ArrayAdapter<Link> dialogArrayAdapter;
-
     private Button stopButton;
-
     private ImageView faviconImageView;
-
     private static final Pattern urlPattern = Pattern.compile("^(https?|ftp|file)://(.*?)");
-    
+    private List<WeakReference<WebViewDemoActivity>> weakRef = new ArrayList<WeakReference<WebViewDemoActivity>>();
+
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
         }
-        
+
         return super.onOptionsItemSelected(item);
     }
-    
-    @SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
+
+    @SuppressLint({
+            "SetJavaScriptEnabled", "NewApi"
+    })
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_webview);
 
-//        getActionBar().setIcon(getResources().getDrawable(R.drawable.ic_action_back));
+        weakRef.add(new WeakReference<WebViewDemoActivity>(this));
+
         getActionBar().setTitle("Back");
-//        getActionBar().setBackgroundDrawable(getResources().getDrawable(android.R.color.black));
         getActionBar().setHomeButtonEnabled(true);
-    
+
         historyStack = new LinkedList<Link>();
         webview = (WebView) findViewById(R.id.webkit);
         faviconImageView = (ImageView) findViewById(R.id.favicon);
@@ -123,18 +119,17 @@ public class WebViewDemoActivity extends Activity {
         urlEditText = (EditText) findViewById(R.id.url);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         stopButton = ((Button) findViewById(R.id.stopButton));
+
         // favicon, deprecated since Android 4.3 but it's still necesary O_O ¿?
         WebIconDatabase.getInstance().open(getDir("icons", MODE_PRIVATE).getPath());
 
         // javascript and zoom
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setBuiltInZoomControls(true);
-
         webview.getSettings().setPluginState(WebSettings.PluginState.ON);
 
         // downloads
         webview.setDownloadListener(new CustomDownloadListener());
-
         webview.setWebViewClient(new CustomWebViewClient());
 
         webview.setWebChromeClient(new WebChromeClient() {
@@ -156,7 +151,8 @@ public class WebViewDemoActivity extends Activity {
 
             @Override
             public void onReceivedTitle(WebView view, String title) {
-                WebViewDemoActivity.this.setTitle(getString(R.string.app_name) + " - " + WebViewDemoActivity.this.webview.getTitle());
+                WebViewDemoActivity.this.setTitle(getString(R.string.app_name) + " - "
+                        + WebViewDemoActivity.this.webview.getTitle());
                 for (Link link : historyStack) {
                     if (link.getUrl().equals(WebViewDemoActivity.this.webview.getUrl())) {
                         link.setTitle(title);
@@ -178,7 +174,6 @@ public class WebViewDemoActivity extends Activity {
                     }
                 }
             }
-
         });
 
         // http://stackoverflow.com/questions/2083909/android-webview-refusing-user-input
@@ -186,38 +181,44 @@ public class WebViewDemoActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                case MotionEvent.ACTION_UP:
-                    if (!v.hasFocus()) {
-                        v.requestFocus();
-                    }
-                    break;
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_UP:
+                        if (!v.hasFocus()) {
+                            v.requestFocus();
+                        }
+                        break;
                 }
                 return false;
             }
 
         });
 
-        // Welcome page loaded from assets directory
-//        if (Locale.getDefault().getLanguage().equals("es")) {
-//            webview.loadUrl("file:///android_asset/welcome_es.html");
-//        } else {
-//            webview.loadUrl("file:///android_asset/welcome.html");
-//        }
-
         String url = null;
+        boolean isValidUrl = true;
         try {
             url = getIntent().getExtras().getString(GcmIntentService.PROMOTION_URL);
+            isValidUrl = isValidUrl(url);
         } catch (Exception e) {
+            url = "";
             Log.e("err", "" + e);
         }
-        if (url == null) {
-            webview.loadUrl("file:///android_asset/welcome.html");
+
+        if (isValidUrl) {
+            webview.loadUrl(url);
         } else {
-            webview.loadUrl(url);    
+            webview.loadUrl("file:///android_asset/page_not_found.html");
         }
-        
+
         webview.requestFocus();
+    }
+
+    private boolean isValidUrl(String url) {
+
+        Matcher matcher = urlPattern.matcher(url);
+        if (matcher.find())
+            return true;
+        else
+            return false;
     }
 
     @Override
@@ -260,7 +261,9 @@ public class WebViewDemoActivity extends Activity {
                 }
                 Bitmap favicon = link.getFavicon();
                 if (favicon == null) {
-                    holder.getImageView().setImageDrawable(super.getContext().getResources().getDrawable(R.drawable.favicon_default));
+                    holder.getImageView().setImageDrawable(
+                            super.getContext().getResources()
+                                    .getDrawable(R.drawable.favicon_default));
                 } else {
                     holder.getImageView().setImageBitmap(favicon);
                 }
@@ -314,7 +317,8 @@ public class WebViewDemoActivity extends Activity {
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             if (checkConnectivity()) {
                 // resets favicon
-                WebViewDemoActivity.this.faviconImageView.setImageDrawable(WebViewDemoActivity.this.getResources().getDrawable(R.drawable.favicon_default));
+                WebViewDemoActivity.this.faviconImageView.setImageDrawable(WebViewDemoActivity.this
+                        .getResources().getDrawable(R.drawable.favicon_default));
                 // shows the current url
                 WebViewDemoActivity.this.urlEditText.setText(url);
 
@@ -343,10 +347,9 @@ public class WebViewDemoActivity extends Activity {
 
         // handles unrecoverable errors
         @Override
-        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-            Toast.makeText(getApplicationContext(), "" + description, Toast.LENGTH_SHORT).show();
+        public void onReceivedError(WebView view, int errorCode, String description,
+                String failingUrl) {
         }
-
     }
 
     public void go(View view) {
@@ -405,28 +408,32 @@ public class WebViewDemoActivity extends Activity {
     }
 
     // DOWNLOAD MANAGER WITH ASYNCTASK
-
     class CustomDownloadListener implements DownloadListener {
-        public void onDownloadStart(final String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+        public void onDownloadStart(final String url, String userAgent, String contentDisposition,
+                String mimetype, long contentLength) {
+
+            if (weakRef.get(0).get() == null || weakRef.get(0).get().isFinishing()) {
+                return;
+            }
+
             AlertDialog.Builder builder = new AlertDialog.Builder(WebViewDemoActivity.this);
 
             builder.setTitle(getString(R.string.download));
             builder.setMessage(getString(R.string.question));
-            builder.setCancelable(false).setPositiveButton((R.string.ok), new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    new DownloadAsyncTask().execute(url);
-                }
+            builder.setCancelable(false)
+                    .setPositiveButton((R.string.ok), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            new DownloadAsyncTask().execute(url);
+                        }
 
-            }).setNegativeButton((R.string.cancel), new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
+                    }).setNegativeButton((R.string.cancel), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
 
             builder.create().show();
-
         }
-
     }
 
     private class DownloadAsyncTask extends AsyncTask<String, Void, String> {
@@ -444,11 +451,13 @@ public class WebViewDemoActivity extends Activity {
                 try {
                     HttpResponse httpResponse = httpClient.execute(httpGet);
 
-                    BufferedHttpEntity bufferedHttpEntity = new BufferedHttpEntity(httpResponse.getEntity());
+                    BufferedHttpEntity bufferedHttpEntity = new BufferedHttpEntity(
+                            httpResponse.getEntity());
 
                     inputStream = bufferedHttpEntity.getContent();
 
-                    String fileName = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/webviewdemo";
+                    String fileName = android.os.Environment.getExternalStorageDirectory()
+                            .getAbsolutePath() + "/webviewdemo";
                     File directory = new File(fileName);
                     File file = new File(directory, url.substring(url.lastIndexOf("/")));
                     directory.mkdirs();
@@ -497,12 +506,15 @@ public class WebViewDemoActivity extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
+            if (weakRef.get(0).get() == null || weakRef.get(0).get().isFinishing()) {
+                return;
+            }
+
             AlertDialog.Builder builder = new AlertDialog.Builder(WebViewDemoActivity.this);
-            builder.setMessage(result).setPositiveButton((R.string.ok), null).setTitle(getString(R.string.download));
+            builder.setMessage(result).setPositiveButton((R.string.ok), null)
+                    .setTitle(getString(R.string.download));
             builder.show();
-
         }
-
     }
 
     /**
@@ -511,7 +523,8 @@ public class WebViewDemoActivity extends Activity {
     private boolean checkConnectivity() {
         boolean enabled = true;
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) this
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connectivityManager.getActiveNetworkInfo();
 
         if ((info == null || !info.isConnected() || !info.isAvailable())) {
