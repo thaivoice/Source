@@ -194,31 +194,7 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 			toDownloadData.put(Utilities.PROD_ID, prodId);
 
 			list.add(toDownloadData);
-			// DownloadIntentService.startActionDownload(getApplicationContext(),
-			// id, uri.toString(), t);/
 		}
-		
-//		if (item == null) {
-//			checkedBoxs.clear();
-//			if (list.size() > 0) {
-//				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//				prefs.edit().putBoolean("APP_STATUS", true).commit();
-//
-//				boolean shouldAskForPermision = prefs.getBoolean("download_permission", true);
-//				if (shouldAskForPermision) {
-//					// Show dialog first.
-//					showPermisionDialog(list);
-//				} else {
-//					downloadTask = new DownloadVideoTask();
-//					downloadTask.execute(list);
-//					VideoListActivity.super.onBackPressed();
-//				}
-//			} else {
-//				VideoListActivity.super.onBackPressed();
-//			}
-//		} else {
-//			VideoListActivity.super.onOptionsItemSelected(item);
-//		}
 		
 		checkedBoxs.clear();
 		if (list.size() > 0) {
@@ -251,7 +227,8 @@ public class VideoListActivity extends BaseActivity implements IOnItemClicked, I
 		alertDialog.setMessage(getString(R.string.lbl_download_permision, String.valueOf(list.size())));
 
 		alertDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
+			@SuppressWarnings("unchecked")
+            public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 				downloadTask = new DownloadVideoTask();
 				downloadTask.execute(list);

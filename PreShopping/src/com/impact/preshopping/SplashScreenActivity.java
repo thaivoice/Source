@@ -30,20 +30,22 @@ import net.hockeyapp.android.CrashManager;
 import net.hockeyapp.android.UpdateManager;
 
 public class SplashScreenActivity extends Activity implements
+
         UpdaterDialogManager.UpdaterUiListener {
 
     protected int splashTime = 4000;
     private SharedPreferences prefs;
     private View splashLogo;
     private boolean skipCompanyPage;
-    private static final String APP_ID = "f50d024c25e96270b41119e2343765d3";
-    
+    private static String APP_ID;
+    private Message message;    
+    public static final String TAG = SplashScreenActivity.class.getSimpleName();
     
     @Override
     @SuppressWarnings("static-access")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        APP_ID = getString(R.string.app_id_hockey);
         checkAppUpdate();
         checkForUpdates();
     }
@@ -134,17 +136,13 @@ public class SplashScreenActivity extends Activity implements
                             } else {
                                 Intent company = new Intent(getApplicationContext(),
                                         LoginActivity.class);
-                                // Intent company = new
-                                // Intent(getApplicationContext(),
-                                // RegistrationActivity.class);
+            
                                 company.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(company);
                             }
 
                         } else {
                             Intent reg = new Intent(getApplicationContext(), PreLoginActivity.class);
-                            // Intent reg = new Intent(getApplicationContext(),
-                            // LoginActivity.class);
                             reg.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(reg);
                         }
@@ -192,8 +190,6 @@ public class SplashScreenActivity extends Activity implements
         }
     }
 
-    private Message message;
-
     private void checkAppUpdate() {
         UpdaterDialogManager updaterUI = new UpdaterDialogManager(
                 getString(R.string.application_endpoint) + Constants.TAG_APP_UPDATER_URL);
@@ -222,6 +218,4 @@ public class SplashScreenActivity extends Activity implements
         this.message = message;
         return true;
     }
-
-    public static final String TAG = SplashScreenActivity.class.getSimpleName();
 }
