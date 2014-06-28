@@ -37,7 +37,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -99,9 +98,6 @@ public class WebViewDemoActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressLint({
-            "SetJavaScriptEnabled", "NewApi"
-    })
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

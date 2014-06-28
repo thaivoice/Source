@@ -20,8 +20,8 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/google-play-services"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/file-explorer"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/HomeActivity"/>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/TurkcellUpdater"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

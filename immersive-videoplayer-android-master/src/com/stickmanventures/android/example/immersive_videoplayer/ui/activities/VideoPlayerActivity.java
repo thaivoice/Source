@@ -1,6 +1,5 @@
 package com.stickmanventures.android.example.immersive_videoplayer.ui.activities;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -194,7 +193,7 @@ public class VideoPlayerActivity extends BaseActivity {
 		updateLayout();
 	}
 
-	@SuppressLint("InlinedApi")
+	
 	private void updateLayout() {
 		if(layout == LAYOUT_DETAILED && configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			// Hide the description fragment
@@ -259,7 +258,7 @@ public class VideoPlayerActivity extends BaseActivity {
 		}
 	}
 	
-	@SuppressLint("InlinedApi")
+	
 	private void startUpdateThread() {
 		if(updateThread == null || updateThread.isInterrupted()) {
 			updateThread = new Thread(new Runnable() {
