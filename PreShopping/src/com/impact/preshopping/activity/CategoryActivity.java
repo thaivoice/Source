@@ -19,6 +19,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.impact.preshopping.BaseActivity;
+import com.impact.preshopping.DeviceManagerIntentService;
 import com.impact.preshopping.PreShoppingApp;
 import com.impact.preshopping.R;
 import com.impact.preshopping.SyncDataService;
@@ -59,15 +60,21 @@ public class CategoryActivity extends BaseActivity implements IOnItemClicked{
 		}
 		
 	}
-    private PendingIntent getPendingIntent(Context context, int id) {
+    private PendingIntent getPendingIntent_SyncData(Context context, int id) {
         Intent intent =  new Intent(context, SyncDataService.class);
+        return PendingIntent.getService(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+    
+    private PendingIntent getPendingIntent_ValidateDevice(Context context, int id) {
+        Intent intent =  new Intent(context, DeviceManagerIntentService.class);
         return PendingIntent.getService(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
     
     private void scheduleAlarm() {
         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
         int interval = Integer.parseInt(getString(R.string.sync_data_interval));
-        am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.currentThreadTimeMillis(), interval * 60 * 1000, getPendingIntent(getApplicationContext(), 1234));
+        am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.currentThreadTimeMillis(), interval * 60 * 1000, getPendingIntent_SyncData(getApplicationContext(), 1234));
+        am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.currentThreadTimeMillis(), 1 * 60 * 1000, getPendingIntent_ValidateDevice(getApplicationContext(), DeviceManagerIntentService.ID));
     }
     
 	@Override
