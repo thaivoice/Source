@@ -448,6 +448,9 @@ public class LoginActivity extends Activity {
 				
 				Utilities.insertNewRegInfo(getApplicationContext(), data);
 				
+				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+				prefs.edit().putString(Utilities.REG_DEVICE_ID, obj.getString(Utilities.REG_DEVICE_ID)).commit();
+				
 			} catch (JSONException e) {
 				Log.e(TAG, "" + e);
 			}

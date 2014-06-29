@@ -41,7 +41,6 @@ public class FavoriteSettingActivity extends PreferenceActivity implements OnSha
 //	private HashMap<String, String> allProducts = new HashMap<String, String>();
 
 	public static final String TAG = FavoriteSettingActivity.class.getSimpleName();
-	private boolean changeDetected;
 	private MultiSelectListPreference byCompany;
 //	private MultiSelectListPreference byCategory;
 //	private MultiSelectListPreference byGroup;
@@ -76,9 +75,6 @@ public class FavoriteSettingActivity extends PreferenceActivity implements OnSha
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		
 		if (keyCode == event.KEYCODE_BACK) {
-			if (!changeDetected) {
-				return super.onKeyDown(keyCode, event);
-			}
 			
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 			String email = prefs.getString(Utilities.EMAIL, "");
@@ -409,6 +405,6 @@ public class FavoriteSettingActivity extends PreferenceActivity implements OnSha
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		changeDetected = true;
+
 	}
 }

@@ -1,70 +1,100 @@
 package com.impact.preshopping;
 
 import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
-import com.github.kevinsawicki.http.HttpRequest;
+import com.dudev.util.BusProvider;
+import com.dudev.util.Constants;
+import com.dudev.util.RequestType;
+import com.dudev.util.RestClient;
+import com.dudev.util.Utilities;
+import com.impact.preshopping.activity.CategoryActivity;
+import com.squareup.otto.Subscribe;
 
 public class DeviceManagerIntentService extends IntentService {
 
-	private static final String ACTION_VALIDATE_DEVICE = "com.impact.preshopping.action.CHECK_DEV_VALIDITY";
-	private static final String ACTION_OTHER = "com.impact.preshopping.action.OTHER";
-
-	private static final String EXTRA_DEV_ID = "com.impact.preshopping.extra.PARAM_DEV_ID";
-	private static final String EXTRA_OTHER_PARAM = "com.impact.preshopping.extra.PARAM_OTHER_PARAM";
+	public static final String ACTION_VALIDATE_DEVICE = "com.impact.preshopping.action.CHECK_DEV_VALIDITY";
+	public static final String EXTRA_DEV_ID = "com.impact.preshopping.extra.PARAM_DEV_ID";
 	public static final int ID = 5005;
-
-	public static void validateDevice(Context context, String devId,
-			String other) {
-		Intent intent = new Intent(context, DeviceManagerIntentService.class);
-		intent.setAction(ACTION_VALIDATE_DEVICE);
-		intent.putExtra(EXTRA_DEV_ID, devId);
-		intent.putExtra(EXTRA_OTHER_PARAM, other);
-		context.startService(intent);
-	}
-
-	public static void startActionBaz(Context context, String param1,
-			String param2) {
-		Intent intent = new Intent(context, DeviceManagerIntentService.class);
-		intent.setAction(ACTION_OTHER);
-		intent.putExtra(EXTRA_DEV_ID, param1);
-		intent.putExtra(EXTRA_OTHER_PARAM, param2);
-		context.startService(intent);
-	}
+	public static final String TAG = DeviceManagerIntentService.class
+			.getSimpleName();
 
 	public DeviceManagerIntentService() {
-		super("DeviceManagerIntentService");
+		super(DeviceManagerIntentService.class.getSimpleName());
 	}
 
 	@Override
-	protected void onHandleIntent(Intent intent) {
+	public void onHandleIntent(Intent intent) {
 		if (intent != null) {
-			final String action = intent.getAction();
-			if (ACTION_VALIDATE_DEVICE.equals(action)) {
-				final String devId = intent.getStringExtra(EXTRA_DEV_ID);
-				final String other = intent.getStringExtra(EXTRA_OTHER_PARAM);
-				validateDeviceById(devId, other);
-			} else if (ACTION_OTHER.equals(action)) {
-				final String param1 = intent.getStringExtra(EXTRA_DEV_ID);
-				final String param2 = intent.getStringExtra(EXTRA_OTHER_PARAM);
-				handleAction_OTHER(param1, param2);
-			}
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+			String devId = prefs.getString(Utilities.REG_DEVICE_ID, "");
+			validateDeviceById(devId);
 		}
 	}
 
-	private void validateDeviceById(String devId, String notUse) {
-		
-		HashMap<String, String> data = new HashMap<String, String>();
-		data.put("deviceID", devId);
-		String response = HttpRequest.post("http://www.preshopping.net/checkdevice.php", data, false).acceptJson().body();
-		System.out.println("response="+response);
+	private void validateDeviceById(String devId) {
+
+		boolean isValid = false;
+		String endpoint = Utilities.reformEndpoint(getApplicationContext(),
+				Constants.TAG_VALIDATE_DEVICE_METHOD);
+		RestClient validateDevClient = new RestClient(endpoint);
+
+		Map<String, String> data = new HashMap<String, String>();
+		data.put(Utilities.REG_DEVICE_ID, devId);
+		JSONObject name = new JSONObject(data);
+		validateDevClient.AddParam("data", name.toString());
+
+		try {
+			validateDevClient.Execute(RequestType.POST);
+			JSONArray response = new JSONArray(validateDevClient.GetResponse());
+			String responseCode = response.getJSONObject(0).getString("status");
+			Log.i(TAG, "" + responseCode);
+			JSONArray arr = response.getJSONObject(0).getJSONArray("data");
+			Log.i(TAG, "nExists=" + arr.getJSONObject(0).getString("nExists"));
+			int count = Integer.parseInt(arr.getJSONObject(0).getString(
+					"nExists"));
+			if (count > 0) {
+				isValid = true;
+			} else {
+				isValid = false;
+			}
+		} catch (Exception e) {
+			isValid = true;
+			Log.e(TAG, "" + e);
+		}
+
+		System.out.println((isValid) ? "VALID DEVICE" : "INVALID DEVICE");
+		if (!isValid) {
+			BusProvider.getInstance().post(new InvalidDeviceDetectedEvent());
+		}
 	}
 
-	private void handleAction_OTHER(String param1, String param2) {
-		// TODO: Handle action Baz
-		throw new UnsupportedOperationException("Not yet implemented");
+	@Subscribe
+	public void onInvalidDeviceDetected(InvalidDeviceDetectedEvent e) {
+    	Intent category = new Intent(getApplicationContext(), CategoryActivity.class);
+    	category.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+    	category.putExtra("FORCE_EXIT", true);
+    	startActivity(category);
+	}
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		BusProvider.getInstance().register(this);
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		BusProvider.getInstance().unregister(this);
 	}
 }

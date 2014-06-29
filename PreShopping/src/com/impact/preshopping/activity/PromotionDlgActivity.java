@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -190,22 +191,24 @@ public class PromotionDlgActivity extends Activity {
                     listOfThreads.add(d);
                 }
                 e.shutdown();
-                // while (!e.isTerminated()) {
-                // Thread.sleep(500);
-                // }
-
-                // publishProgress();
-
-                for (int i = 0; i < listOfThreads.size(); i++) {
-                    Log.i(TAG, "" + listOfThreads.get(i).get().get("BELONG_TO") + ", " + listOfThreads.get(i).get().get("ID") + ", "
-                            + listOfThreads.get(i).get().get("URI"));
-                    String belongTo = listOfThreads.get(i).get().get("BELONG_TO").toString();
-                    String id = listOfThreads.get(i).get().get("ID").toString();
-                    String filePath = listOfThreads.get(i).get().get("URI").toString();
-                    long total = Utilities.updateIconOrImageFilePath(getApplicationContext(), belongTo, id, filePath);
-                    Log.e(TAG, "Updated: " + total);
+                if (!e.awaitTermination(3, TimeUnit.MINUTES)) {
+                	success = false;
+                } else {
+                	success = true;
                 }
 
+                if (success) {
+                	for (int i = 0; i < listOfThreads.size(); i++) {
+                        Log.i(TAG, "" + listOfThreads.get(i).get().get("BELONG_TO") + ", " + listOfThreads.get(i).get().get("ID") + ", "
+                                + listOfThreads.get(i).get().get("URI"));
+                        String belongTo = listOfThreads.get(i).get().get("BELONG_TO").toString();
+                        String id = listOfThreads.get(i).get().get("ID").toString();
+                        String filePath = listOfThreads.get(i).get().get("URI").toString();
+                        long total = Utilities.updateIconOrImageFilePath(getApplicationContext(), belongTo, id, filePath);
+                        Log.e(TAG, "Updated: " + total);
+                    }                	
+                }
+                
             } catch (InterruptedException e) {
                 Log.e(TAG, "" + e);
                 success = false;
