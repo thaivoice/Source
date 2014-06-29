@@ -573,9 +573,13 @@ public class RegistrationActivity extends Activity implements OnEditorActionList
 				prefs.edit().putBoolean(Constants.TAG_NONE_REGISTERED, false).commit();
 				prefs.edit().putString(Utilities.EMAIL, regInfoMap.get(Utilities.EMAIL)).commit();
 
-				Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
-				startActivity(loginActivity);
-				finish();
+				Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				i.putExtra(LoginActivity.EXTRA_FORCE_LOGIN, true);
+				i.putExtra(Utilities.REG_PASSWORD, regInfoMap.get(Utilities.PASSWORD));
+				i.putExtra(Utilities.REG_EMAIL, regInfoMap.get(Utilities.EMAIL));
+				startActivity(i);
+				
 			} else {
 				String msg = result.get(1).toString();
 				String field = result.get(2).toString();

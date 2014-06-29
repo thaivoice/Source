@@ -22,6 +22,7 @@ public final class Constants {
 	public static final String TAG_VALIDATE_MOBILE_NUMBER_METHOD = "checkmobilephone.php";
 	public static final String TAG_GET_DATA = "getdata.php";
 	public static final String TAG_GET_DBVERSION_METHOD = "getversion.php";
+	public static final String TAG_VALIDATE_DEVICE_METHOD = "checkdevice.php";
 	public static final String TAG_APP_UPDATER_URL = "android_update_url.json";
 	
 	// Flag for alert type.

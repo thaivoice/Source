@@ -23,6 +23,7 @@ import com.impact.preshopping.R;
 
 public class MySqlHelper extends SQLiteOpenHelper {
 
+    @SuppressWarnings("unused")
     private static String DB_PATH;
 	private static String DB_NAME = "preshopping.db";
 	private final Context myContext;

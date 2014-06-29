@@ -7,7 +7,6 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,10 +18,12 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.impact.preshopping.BaseActivity;
+import com.impact.preshopping.CompanyFragmentActivity.IOnItemClicked;
+import com.impact.preshopping.DeviceManagerIntentService;
+import com.impact.preshopping.PreLoginActivity;
 import com.impact.preshopping.PreShoppingApp;
 import com.impact.preshopping.R;
 import com.impact.preshopping.SyncDataService;
-import com.impact.preshopping.CompanyFragmentActivity.IOnItemClicked;
 import com.impact.preshopping.adapter.ImageAdapter;
 import com.impact.preshopping.db.MySqlHelper;
 
@@ -32,12 +33,45 @@ public class CategoryActivity extends BaseActivity implements IOnItemClicked{
 	private String id;
 	private Bundle map;
 
+	
+    private void scheduleAlarm() {
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        int interval = Integer.parseInt(getString(R.string.sync_data_interval));
+
+    	PendingIntent devMgr = PendingIntent.getService(getApplicationContext(), 3333, new Intent(getApplicationContext(), DeviceManagerIntentService.class), 0);
+    	PendingIntent syncData = PendingIntent.getService(getApplicationContext(), 5555, new Intent(getApplicationContext(), SyncDataService.class), 0);
+
+        am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.currentThreadTimeMillis(), interval * 60 * 1000, syncData);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.currentThreadTimeMillis(), (interval) * 60 * 1000, devMgr);
+    }
+    
+    private void cancelAlarms() {
+    	AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+    	PendingIntent devMgr = PendingIntent.getService(getApplicationContext(), 3333, new Intent(getApplicationContext(), DeviceManagerIntentService.class), 0);
+    	PendingIntent syncData = PendingIntent.getService(getApplicationContext(), 5555, new Intent(getApplicationContext(), SyncDataService.class), 0);
+    	am.cancel(devMgr);
+    	am.cancel(syncData);
+    }	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.grid_layout);
-		gridView = (GridView) findViewById(R.id.gridView2);
 		
+		try {
+			boolean forceExit = getIntent().getBooleanExtra("FORCE_EXIT", false);
+			if (forceExit) {
+				cancelAlarms();
+				Intent preLogin = new Intent(getApplicationContext(), PreLoginActivity.class);
+				startActivity(preLogin);
+				finish();
+				return;
+			}
+		} catch (Exception e) {
+			Log.e(TAG, "" + e);
+		}
+		
+		gridView = (GridView) findViewById(R.id.gridView2);
 		if (Boolean.valueOf(getString(R.string.app_no_company_preset))) {
 			map = new Bundle();
 			id = "";
@@ -59,16 +93,6 @@ public class CategoryActivity extends BaseActivity implements IOnItemClicked{
 		}
 		
 	}
-    private PendingIntent getPendingIntent(Context context, int id) {
-        Intent intent =  new Intent(context, SyncDataService.class);
-        return PendingIntent.getService(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-    
-    private void scheduleAlarm() {
-        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        int interval = Integer.parseInt(getString(R.string.sync_data_interval));
-        am.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.currentThreadTimeMillis(), interval * 60 * 1000, getPendingIntent(getApplicationContext(), 1234));
-    }
     
 	@Override
 	protected void onResume() {
